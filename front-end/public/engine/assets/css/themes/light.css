@@ -1,0 +1,108 @@
+:root {
+  --color-error: #ff0000;
+  --color-warning: #ddc700;
+  --color-info: #00b0e6;
+  --color-success: #00ca00;
+  --color-primary: #0077FF;
+  --color-secondary: #61C963;
+  --color-online: #61C963;
+  --color-offline: #ff0000;
+  --color-busy: #ddc700;
+  --color-away: #ddc700;
+  --color-snooze: #00b0e6;
+  --color-ingame: #0077FF;
+
+  --color-text: black;
+  --color-text-sphover: white;
+  --color-text-inverted: white;
+  --color-text-selected: #818c99;
+  --color-text-primary: #0453ad;
+  --color-text-secondary: #4e4e4e;
+  --color-text-link: #4e4e4e;
+  --color-text-title: #4e4e4e;
+  --color-text-subtitle: black;
+
+  --color-scroll-background: white;
+  --color-scroll-bar: #EDEEF0;
+
+  --color-shimmer-background: white;
+  --color-shimmer-effect: #EDEEF0;
+
+  --color-navigation-icon: #ADB5BD;
+  --color-navigation-hover: #e5e6e9;
+
+  --color-background: #EDEEF0;
+  --color-background-text: #000000;
+
+  --color-separator: #dbdbdb;
+
+  --color-header: white;
+  --color-header-blur: #ffffffcf;
+  --color-header-text: #000000;
+  --color-header-icon: #ADB5BD;
+  --color-header-hover: #89898914;
+  --color-header-border: #E7E8EC;
+  --color-header-block: #89898914;
+
+  --color-context-screen: #0808087d;
+  --color-context-shadow: #0000001a;
+  --color-context-shadow_screen: #0000004d;
+
+  --color-footer: #FFFFFF;
+  --color-footer-text: #1a1a1a;
+  --color-footer-social: #f5f5f5;
+
+  --color-block: #FFFFFF;
+  --color-block-hover: #f9f9f9;
+  --color-block-hover_a12: #aeb7c21f;
+  --color-block-hover_soft: #fbfbfb;
+  --color-block-blur: #ffffffa8;
+  --color-block-secondary: #fbfbfb;
+  --color-block-primary: #0077FF;
+  --color-block-wrap: #f9f9f9;
+  --color-block-text: #000000;
+  --color-block-border: #dce1e6;
+
+  --color-verify: #08c308;
+
+  --color-input-background: #fafafa;
+  --color-input-text: #000000;
+  --color-input-border: #dce1e6;
+
+  --color-button: #F0F0F0;
+  --color-button-hover: #e5e6e9;
+  --color-button-text: #7a7a7a;
+  --color-button-border: #dce1e6;
+  /*--color-button-primary: #3F78E1;
+  --color-button-primary-hover: #618cdc;*/
+  --color-button-primary: #0077FF;
+  --color-button-primary-hover: #258afd;
+  --color-button-secondary: #61C963;
+  --color-button-secondary-hover: #78d379;
+  --color-button-error: #FF396F;
+  --color-button-error-hover: #fd6276;
+  --color-button-warning: #FFC100;
+  --color-button-warning-hover: #f8c91f;
+  --color-button-info: #00b0e6;
+  --color-button-info-hover: #16c1f5;
+  --color-button-blur: #ffffff65;
+  --color-button-blur-hover: #ffffff80;
+
+  --color-profile-header-shadow: #ebebeb94;
+
+  --color-message: #edeef080;
+  --color-message-me: #0077ff12;
+  --color-message-unread: #F0F2F5;
+  --color-message-selected: #EDF5FF;
+  --color-message-selected-mobile: #e7e7e7;
+  --color-message-selected-mobile-me: #c4e8fd;
+  --color-message-shadow: #223c5018;
+
+  --color-player-blur: #ffffffb5;
+  --color-player-bar: #e9e9e9;
+  --color-player-bar-load: #8181811f;
+  --color-player-bar-mover: #93c6ff;
+  --color-player-bar-progress: #07f;
+  --color-player-lyric-text: #8f8f8fa8;
+  --color-player-lyric-selected: #8f8f8fb3;
+}
