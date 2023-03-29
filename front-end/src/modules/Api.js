@@ -3,11 +3,11 @@ import state from '@/state.js'
 import Debug from '@/modules/Debug.js'
 import Storage from '@/modules/Storage.js'
 import { Decrypt } from '@/modules/Crypto.js'
-import { SessionDecrypt, ApiEncrypt, getHash } from "@/modules/Crypto.js"
+import { ApiEncrypt } from "@/modules/Crypto.js"
 
 export default {
   name: 'Api',
-  getApiLink: function (method, params){
+  getApiLink: function (method, params, is_longpoll = false){
     /* Http Param Builder */
     let httpParams = "?";
 
@@ -25,58 +25,26 @@ export default {
     /* Http Link Builder */
     const https = config.domains.https ? "https" : "http";
     httpParams = httpParams.substring(0, httpParams.length - 1);
+    if(is_longpoll) return `${https}://${config.domains.longpollDomain}/${method}${httpParams}`;
     return `${https}://${config.domains.apiDomain}/methods/${method}${httpParams}`;
   },
   createSession: async function (){
-    state.loading = true;
-    state.api_loading = true;
-    state.session_loading = true;
-
-    return await state.axios({
-      method: 'post',
-      url: this.getApiLink('front.session', {}),
-      timeout: 60000,
-      responseType: 'json',
-      xsrfCookieName: 'ozlxsrf',
-      data: this.getApiBody({ client: config.apiData.client, client_id: config.apiData.client_id, engine_ver: config.engine.ver }, false)
-    })
-    .then(async (response) => {
-        state.loading = false;
-        state.api_loading = false;
-        state.session_loading = false;
-
-        if(response.data.status == "error"){
-          if(config.debug.api_log) Debug.error('Session / Get', response.data.error_msg);
-          state.$event.emit("api-error-sessionCreated");
-        } else if(response.data.status == "success"){
-          if(config.debug.api_log) Debug.success('Session / Get', response.data);
-
-          var session_hash = await getHash(`${config.apiData.client_id}${config.apiData.client}${response.data.response.engine.client_ver}${response.data.response.engine.server_ver}${response.data.response.engine.timestamp}${Decrypt(config.apiData.client_key)}`);
-          let session = JSON.parse(SessionDecrypt(response.data.response.session, session_hash));
-          //let session_info = JSON.parse(SessionDecrypt(session.session_info, session.session_id));
-          //console.log(session_info);
-          config.apiData.session_id = session.session_id;
-        } else {
-          if(config.debug.api_log) Debug.warning('Session / Get', response.data);
-        }
-
-        return response.data;
-    })
-    .catch((error) => {
-        state.loading = false;
-        state.api_loading = false;
-        state.session_loading = false;
-        state.session_unavailable = true;
-        if(config.debug.api_error) Debug.error('Session / Get', error);
-        state.$event.emit("api-error-sessionCreated");
-        return error;
-    });
+    
   },
-  getApiBody: function (params, secret_use = false){
+  getApiBody: function (params, secret_use = false, files = null){
     const bodyFormData = new FormData();
 
     for (const [key, value] of Object.entries(params)) {
       bodyFormData.append(key, value);
+    }
+
+    if(files){
+      for (const [key, values] of Object.entries(files)) {
+        values.forEach(value => {
+          if(typeof value.name != 'undefined') bodyFormData.append(key, value.data, value.name);
+          else bodyFormData.append(key, value.data);
+        });
+      }
     }
 
     if(Storage.is('access_token')) bodyFormData.append('access_token', Storage.get('access_token', true));
@@ -107,27 +75,88 @@ export default {
       }*/
     })
     .then((response) => {
-        state.loading = false;
-        state.api_loading = false;
-        //state.server_unavailable = false;
+      state.loading = false;
+      state.api_loading = false;
+      //state.server_unavailable = false;
 
-        if(response.data.status == "error"){
-          if(config.debug.api_log) Debug.error('Api / Get', response.data.error_msg);
-          if(response.data.error_name == "auth_error") state.$event.emit("api-error-authed");
-        } else if(response.data.status == "success"){
-          if(config.debug.api_log) Debug.success('Api / Get', response.data);
-        } else {
-          if(config.debug.api_log) Debug.warning('Api / Get', response.data);
-        }
+      if(response.data.status == "error"){
+        if(config.debug.api_log) Debug.error('Api / Get', response.data.error_msg);
+        if(response.data.error_name == "auth_error") state.$event.emit("api-error-authed");
+      } else if(response.data.status == "success"){
+        if(config.debug.api_log) Debug.success('Api / Get', response.data);
+      } else {
+        if(config.debug.api_log) Debug.warning('Api / Get', response.data);
+      }
 
-        return full_response ? response : response.data;
+      return full_response ? response : response.data;
     })
     .catch((error) => {
-        state.loading = false;
-        state.api_loading = false;
-        state.server_unavailable = true;
-        if(config.debug.api_error) Debug.error('Api / Get', error);
-        return {status: 'server_error', error: error};
+      state.loading = false;
+      state.api_loading = false;
+      state.server_unavailable = true;
+      if(config.debug.api_error) Debug.error('Api / Get', error);
+      return {status: 'server_error', error: error};
+    });
+  },
+  longpoll: async function (method, getParams, postParams, secret_use = false, full_response = false, v = config.apiData.api_version) {
+    Object.assign(postParams, { client: config.apiData.client, client_id: config.apiData.client_id });
+    postParams['v'] = v;
+
+    return await state.axios({
+      method: 'post',
+      url: this.getApiLink(method, getParams, true),
+      timeout: 120000,
+      responseType: 'json',
+      xsrfCookieName: 'ozlxsrf',
+      data: this.getApiBody(postParams, secret_use),
+    })
+    .then((response) => {
+      if(response.data.status == "error"){
+        if(config.debug.api_log) Debug.error('Api / Get', response.data.error_msg);
+        if(response.data.error_name == "auth_error") state.$event.emit("api-error-authed");
+      }
+
+      return full_response ? response : response.data;
+    })
+    .catch((error) => {
+      if(config.debug.api_error) Debug.error('Api / Get', error);
+      return {status: 'server_error', error: error};
+    });
+  },
+  upload: async function (method, getParams, postParams, files, secret_use = false, full_response = false, v = config.apiData.api_version) {
+    Object.assign(postParams, { client: config.apiData.client, client_id: config.apiData.client_id });
+    state.loading = true;
+    state.api_loading = true;
+
+    postParams['v'] = v;
+
+    return await state.axios({
+      method: 'post',
+      url: this.getApiLink(method, getParams),
+      timeout: 60000,
+      responseType: 'json',
+      xsrfCookieName: 'ozlxsrf',
+      data: this.getApiBody(postParams, secret_use, files),
+      /*headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }*/
+    })
+    .then((response) => {
+      state.loading = false;
+      state.api_loading = false;
+
+      if(response.data.status == "error"){
+        if(config.debug.api_log) Debug.error('Api / Get', response.data.error_msg);
+        if(response.data.error_name == "auth_error") state.$event.emit("api-error-authed");
+      }
+
+      return full_response ? response : response.data;
+    })
+    .catch((error) => {
+      state.loading = false;
+      state.api_loading = false;
+      if(config.debug.api_error) Debug.error('Api / Get', error);
+      return {status: 'server_error', error: error};
     });
   },
   EncryptData: function (data){

@@ -2,7 +2,7 @@ import { reactive, version } from 'vue'
 
 export default reactive({
   engine: {
-    name: 'ozLEngine Vite',
+    name: 'ozLEngine',
     ver: require('../package.json').version,
     vue: version
   },
@@ -11,7 +11,7 @@ export default reactive({
     wss: false,
     local: false,
     host: window.location.host,
-    domain: import.meta.env.DEV ? "localhost:8080" : (local ? "diplom.test" : "diplom.ozliginus.ru"),
+    domain: (process.env.NODE_ENV === 'development') ? "localhost:8080" : (this.local ? "diplom.test" : "diplom.ozliginus.ru"),
     subdomain: window.location.host.split('.')[0],
     authDomain: "auth.ozliginus.ru",
     serverDomain: "server.ozliginus.ru",

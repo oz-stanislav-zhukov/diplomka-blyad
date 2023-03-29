@@ -18,15 +18,22 @@ export default reactive({
   $i18n: null,
   $t: null,
 
+  platform: {
+    mode: "desktop",
+    view_mode: "desktop",
+  },
   player: {},
   user_settings: {
-    theme: "dark",
+    theme: "light",
     language: "ru"
   },
   page_state: {
+    width: 0,
+    height: 0,
     active: 'Main',
     title: 'Main Page',
-    icon: '/engine/assets/ico/logo.png'
+    icon: '/engine/assets/ico/logo.png',
+    height_full: false
   },
 
   admin: {
@@ -37,6 +44,19 @@ export default reactive({
   site: {
     context_id: "",
     context_blocked: {},
+    mainmenu_active: false,
+    service: {
+      active: false,
+      hide_menu: true,
+      name: '',
+      back: null,
+      links: [],
+    },
+    pages: {
+      profile: {}
+    },
+    bg: null,
+    suser: null,
   },
 
   headers: []

@@ -1,0 +1,37 @@
+
+.wave{
+  background-image: url('/engine/assets/img/l-wave-blue-c.png');
+  background-clip: text;
+  color: rgba(0,0,0,0.05);
+  text-shadow: 0px 0px rgba(255,255,255,0.06);
+  animation: wave-animation 2s infinite linear, loading-animation 15s infinite linear alternate;
+  background-size: 1000px 1080px;
+  background-repeat: repeat-x;
+  opacity: 1;
+}
+
+@keyframes wave-animation{
+  0% { background-position: 0 bottom };
+  100% { background-position: 1000px bottom };
+}
+
+@keyframes loading-animation{
+  0% { background-size: 1000px 20px };
+  20% { background-size: 1000px 40px };
+  50% { background-size: 1000px 70px };
+  100% { background-size: 1000px 80px };
+}
+
+
+.wave-text-big{
+  text-transform: uppercase;
+  font-family: 'Cabin Condensed', sans-serif;
+  font-weight: bold;
+  font-size: 45px;
+  text-align: center;
+  display: block;
+  user-select: none;
+  
+  @media (max-width: $ozk-content-mobile-max-width), (max-height: $ozk-content-mobile-max-height) { font-size: 30px; }
+  @media (max-width: $ozk-content-mobile-middle-width), (max-height: $ozk-content-mobile-middle-height) { font-size: 20px; }
+}

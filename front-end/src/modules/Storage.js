@@ -7,6 +7,10 @@ export default {
     let data = localStorage[key];
     return crypt ? Decrypt(data) : data;
   },
+  getBool: function (key, crypt = false){
+    let data = this.get(key, crypt);
+    return data == 'true';
+  },
   set: function (key, data, crypt = false){
     localStorage[key] = (crypt) ? Encrypt(data) : data;
   },
@@ -28,7 +32,7 @@ export default {
     return crypt ? Decrypt(result) : result;
   },
   setCookie: function (key, data, crypt = false, age = 2678400){
-    if(import.meta.env.DEV) document.cookie = `${key}=${(crypt) ? Encrypt(data) : data}; path=/; samesite=lax; max-age=${age}`;
+    if(process.env.NODE_ENV === 'development') document.cookie = `${key}=${(crypt) ? Encrypt(data) : data}; path=/; samesite=lax; max-age=${age}`;
     else document.cookie = `${key}=${(crypt) ? Encrypt(data) : data}; path=/; domain=.${config.domains.domain}; samesite=lax; max-age=${age}`;
     return true;
   },

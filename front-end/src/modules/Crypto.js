@@ -1,7 +1,7 @@
 import CryptoJS from 'crypto-js/crypto-js'
 
-const KEY = CryptoJS.enc.Utf8.parse("zk7RIj7E42nBOm3I"); // 16 bit
-const IV = CryptoJS.enc.Utf8.parse("l90DMDkBviBuewii0BZ4uFXqBVOFjKm7"); // 32 bit
+const KEY = CryptoJS.enc.Utf8.parse("yRNpKbjPcwnhA4E4"); // 16b
+const IV = CryptoJS.enc.Utf8.parse("Fbw0L7Np3Ep8kaIb9jwYpByzfdVj2ScB"); // 32b
 
 export function CryptoGenPublic(count = 16){
   return CryptoJS.lib.WordArray.random(count);
@@ -33,9 +33,9 @@ export function Encrypt(decrypted, passphrase = false) {
 
     encrypted = CryptoJS.enc.Base64.stringify(encrypted.ciphertext);
     encrypted = CryptoJS.RC4.encrypt(encrypted, key, {
-        iv: iv,
-        mode: CryptoJS.mode.CBC,
-        padding: CryptoJS.pad.Iso10126
+      iv: iv,
+      mode: CryptoJS.mode.CBC,
+      padding: CryptoJS.pad.Iso10126
     });
 
     encrypted = CryptoJS.enc.Base64.stringify(encrypted.ciphertext);

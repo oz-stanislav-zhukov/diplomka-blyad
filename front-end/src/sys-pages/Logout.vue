@@ -1,12 +1,12 @@
 <template>
-	<div class="logout">
+	<div class="page_logout">
 		logout
 	</div>
 </template>
   
 <script>
 export default {
-  name: 'ozAccountLogout',
+  name: 'AccountLogout',
   created(){
     this.$PageController.pageSettings('Logout', false, false, null, 'logout_account');
     this.$User.LogOut(true, true);
@@ -15,7 +15,7 @@ export default {
   },
   mounted() { this.$PageController.pageMounted(); },
   beforeUnmount() { this.$PageController.pageUnmounted(); },
-  components: { LoadIndicator }
+  components: { }
 }
 </script>
 <style lang="scss" scoped></style>

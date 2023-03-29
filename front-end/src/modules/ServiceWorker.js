@@ -3,7 +3,7 @@ import { register } from 'register-service-worker'
 import Debug from '@/modules/Debug.js'
 import config from '@/config.js'
 
-if (import.meta.env.PROD) {
+if (process.env.NODE_ENV === 'production') {
   register(`${process.env.BASE_URL}service-worker.js`, {
     ready () {
       if(config.debug.sw_log) Debug.log('SW', 'App is being served from cache by a service worker.');

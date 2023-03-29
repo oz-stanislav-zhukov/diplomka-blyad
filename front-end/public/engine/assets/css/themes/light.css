@@ -89,20 +89,4 @@
   --color-button-blur-hover: #ffffff80;
 
   --color-profile-header-shadow: #ebebeb94;
-
-  --color-message: #edeef080;
-  --color-message-me: #0077ff12;
-  --color-message-unread: #F0F2F5;
-  --color-message-selected: #EDF5FF;
-  --color-message-selected-mobile: #e7e7e7;
-  --color-message-selected-mobile-me: #c4e8fd;
-  --color-message-shadow: #223c5018;
-
-  --color-player-blur: #ffffffb5;
-  --color-player-bar: #e9e9e9;
-  --color-player-bar-load: #8181811f;
-  --color-player-bar-mover: #93c6ff;
-  --color-player-bar-progress: #07f;
-  --color-player-lyric-text: #8f8f8fa8;
-  --color-player-lyric-selected: #8f8f8fb3;
 }

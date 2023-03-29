@@ -13,7 +13,7 @@ import { createWebHistory, createRouter } from "vue-router";
 function route(){
   let route;
   if (parts.length === (domainLength - 1) || parts.length === (domainLength - 2) || parts[0] === 'www') {
-    route = import.meta.env.DEV ? devIndex : index;
+    route = (process.env.NODE_ENV === 'development') ? devIndex : index;
   } else if (parts[0] === 'diplom') {
     route = index;
   } else route = notsubdomain;

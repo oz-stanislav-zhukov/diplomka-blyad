@@ -2,37 +2,13 @@ import config from '@/config.js'
 import state from '@/state.js'
 import user from '@/userdata.js'
 import Api from '@/modules/Api.js'
-import Functions from '@/modules/Functions.js'
 import Storage from '@/modules/Storage.js'
 import { SessionDecrypt, getHash } from "@/modules/Crypto.js"
 
 export default {
   name: 'User',
   Init: async function (){
-    state.$event.on("api-error-authed", this.setAuthed);
-    state.user_loading = true;
-    await this.checkCookie();
     
-    if(this.isLogined()) {
-      user.id = Storage.get('user_id', true);
-      user.login = Storage.get('user_login', true);
-      user.account_security.access_token = Storage.get('access_token', true);
-      
-      if(!user.id || !user.login || user.account_security.access_token == null){
-        this.setAuthed(false);
-        return;
-      }
-
-      if(await this.isAuth()){
-        const r = await this.getUserInform(user.id);
-        if(r.status == 'success'){
-          Object.assign(user, r.response[0]);
-          Object.assign(user, Functions.translitName(user));
-          state.user_loading = false;
-          state.$event.emit("user-loaded");
-        }
-      }
-    }
   },
 
   /* Authorize */
@@ -97,5 +73,18 @@ export default {
   getUserInform: async function (user_ids){
     let r = await Api.query("front/users.get", {}, { user_ids: user_ids, fields: 'privacy' });
     return r;
-  }
+  },
+
+  /* Functions */
+  isOnline: function (user, sec = 60){
+    return user.online >= (Math.floor(Date.now() / 1000) - sec);
+  },
+  isInactive: function (user){
+    if(!user) return true;
+    if(user.is_deleted) return true;
+    if(user.blocked >= 2) return true;
+  },
+  isLocaly: function (u){ return u?.id == user.id; },
+  isMyPage: function (){ return state.site.suser.id == user.id; },
+  isSpecialShow: function (user){ return ((user.blocked < 2 && user.blocked >= 0) || (user.localy && user.blocked < 0)) && !user.is_deleted; },
 }

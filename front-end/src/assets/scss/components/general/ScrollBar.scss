@@ -1,0 +1,51 @@
+::-webkit-scrollbar {
+  min-width: 8px;
+  width: 0.8vh;
+  background-color: var(--color-scroll-bar);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-scroll-background);
+}
+
+@media (max-width: 1099px) {
+  ::-webkit-scrollbar {
+    min-width: 7px;
+  }
+}
+
+@media (max-width: 999px) {
+  ::-webkit-scrollbar {
+    min-width: 6px;
+  }
+}
+
+@media (max-width: 899px) {
+  ::-webkit-scrollbar {
+    min-width: 5px;
+  }
+}
+
+@media (max-width: 799px) {
+  ::-webkit-scrollbar {
+    min-width: 4px;
+  }
+}
+
+@media (max-width: 699px) {
+  ::-webkit-scrollbar {
+    min-width: 3px;
+  }
+}
+
+@media (max-width: 599px) {
+  ::-webkit-scrollbar {
+    min-width: 2px;
+  }
+}
+
+@media (max-width: 499px) {
+  ::-webkit-scrollbar {
+    min-width: 1px;
+  }
+}

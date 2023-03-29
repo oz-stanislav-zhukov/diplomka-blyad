@@ -87,20 +87,4 @@
   --color-button-blur-hover: #ffffff80;
 
   --color-profile-header-shadow: #1c1c1c94;
-
-  --color-message: #38383880;
-  --color-message-me: #0077ff30;
-  --color-message-unread: #242424;
-  --color-message-selected: #282828;
-  --color-message-selected-mobile: #464646;
-  --color-message-selected-mobile-me: #4099ff59;
-  --color-message-shadow: #b7b7b71a;
-
-  --color-player-blur: #3838388c;
-  --color-player-bar: #78787857;
-  --color-player-bar-load: #81818157;
-  --color-player-bar-mover: #3c94f7;
-  --color-player-bar-progress: #07f;
-  --color-player-lyric-text: #ffffff85;
-  --color-player-lyric-selected: #ffffff87;
 }

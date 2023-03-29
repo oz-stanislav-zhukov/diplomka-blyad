@@ -4,6 +4,17 @@ import config from '@/config.js'
 
 export default {
   name: 'Functions',
+  created(){
+    Array.prototype.unique = function() {
+      var a = this.concat();
+      for(var i=0; i<a.length; ++i) {
+        for(var j=i+1; j<a.length; ++j) {
+          if(a[i] === a[j]) a.splice(j--, 1);
+        }
+      }
+      return a;
+    };
+  },
   rand: function (max = 1){
     if(max == 0) max = 1;
     return Math.floor(Math.random() * max) + 1;
@@ -15,7 +26,6 @@ export default {
     return key;
   },
   getLink: function (domain){
-    //if(process.env.NODE_ENV === 'development') return '';
     return `${(config.domains.https ? 'https' : 'http')}://${config.domains[domain]}`;
   },
   isSubDomain: function (subdomain){
@@ -51,5 +61,34 @@ export default {
   },
   cHM(min) {
     return ("0" + min).slice(-2);
+  },
+  ClipboardCoby(text) {
+    navigator.clipboard.writeText(text);
+  },
+  GetYouTubeVideoID(url){
+    var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+    var match = url.match(regExp);
+    return (match&&match[7].length==11)? match[7] : false;
+  },
+  HideNumber(string, replaceTo = '·', elemsHide = 5, sliceFromback = 2) { // eslint-disable-next-line
+    var result = string.match(/^(\(?\+?\d{1,2}\)? ?\(?\d{1,3}\)? ?\d+\-? ?\d+\-? ?\d+)$/);
+    if (result !== null){
+      const regex = new RegExp(`((\\(?\\ ?\\-?\\d\\ ?\\-?\\)?){${elemsHide}})((\\ ?\\-?\\d\\ ?\\-?){${sliceFromback}}$)`, 'gm');
+
+      let m;
+      while ((m = regex.exec(string)) !== null) {
+        if (m.index === regex.lastIndex) regex.lastIndex++;
+
+        const forRex = m[1];
+        const str = m[1].replace(/(\d)/gm, replaceTo);
+        const lasts = m[3];
+        const full = string;
+        const noBack = full.slice(0, -lasts.length).slice(0, -forRex.length);
+        const out = noBack+''+str+''+lasts;
+        return out;
+      }
+
+      return string;
+    } else return string;
   }
 }

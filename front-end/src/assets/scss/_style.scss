@@ -1,0 +1,28 @@
+@import "./variables/Fonts.scss";
+
+
+/* General */
+@import "./components/general/Main.scss";
+@import "./components/general/ScrollBar.scss";
+@import "./components/general/Container.scss";
+
+
+/* Effects */
+@import "./components/effects/Levitation.scss";
+@import "./components/effects/Wave.scss";
+@import "./components/effects/Spin.scss";
+
+
+/* Buttons */
+@import "./components/buttons/UButton.scss";
+@import "./components/buttons/Buttons.scss";
+@import "./components/buttons/Accordion.scss";
+
+
+/* Pages */
+@import "./components/pages/Login.scss";
+@import "./components/pages/LoadingPage.scss";
+
+
+/* Others */
+@import "./components/others/Multiselect.scss";

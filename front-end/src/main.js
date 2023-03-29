@@ -12,9 +12,6 @@ import VueMobileDetection from "vue-mobile-detection";
 import Particles from "particles.vue3";
 import VueScrollTo from "vue-scrollto";
 
-/* CSS Modules */
-import './assets/css/general.css'
-
 /* App Modules */
 import App from '@/App.vue'
 
