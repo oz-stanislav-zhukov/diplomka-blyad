@@ -1,0 +1,123 @@
+.MainSearch {
+  gap: 10px;
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  font-family: sans-serif!important;
+  color: var(--color-text);
+}
+
+.MainSearch_image{
+  position: fixed;
+  background-image: url(/engine/assets/img/background.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  top: calc(50% - 250px);
+  right: calc(50% - 820px);
+  width: 1000px;
+  height: 600px;
+  margin-right: -6px;
+  border-radius: 6px;
+  z-index: -1;
+
+  @media (max-width: $content-mobile-tablet){
+    left: 0;
+    top: calc(100% - 250pt);
+    width: 100%;
+	}
+
+  @media (max-width: $content-mobile-middle-width){ top: calc(100% - 260pt); }
+  @media (max-width: $content-mobile-min-width){ display: none; }
+}
+
+.MainSearch_title {
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--color-text);
+}
+
+.MainSearch_desc {
+  font-size: 15px;
+}
+
+.MainSearch_wrapper{
+  gap: 10px;
+  display: flex;
+  margin-top: 20px;
+  user-select: none;
+}
+
+.MainSearch_input {
+  border: 0;
+  margin: 0;
+  width: 100%;
+  height: 42px;
+  outline: none;
+  transition: .3s;
+  border-radius: $input-radius;
+  background-position: 10px;
+  background-repeat: no-repeat;
+  padding: 0 5px 0 10px;
+  box-sizing: border-box;
+  line-height: 28px;
+  color: var(--color-header-text);
+  background-color: var(--color-block);
+  border: 1px solid var(--color-header-border);
+}
+
+.MainSearch_button{
+  color: white!important;
+  cursor: pointer;
+  display: flex;
+  padding: 0 20px;
+  transition: .2s;
+  min-height: 40px;
+  align-items: center;
+  border-radius: $button-radius;
+  background-color: var(--color-button-primary);
+}
+
+.MainSearch_button:hover{
+  color: white!important;
+  background-color: var(--color-button-primary-hover);
+}
+
+.MainSearch_example{
+  gap: 10px;
+  margin-top: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  user-select: none;
+  
+  @media (max-width: $content-mobile-max-width){
+    flex-wrap: wrap;
+  }
+}
+
+.MainSearch_example_text{
+  font-size: 12px;
+  color: var(--color-text-selected);
+  
+  @media (max-width: $content-mobile-max-width){
+    width: 100%;
+  }
+}
+
+.MainSearch_example_card{
+  color: var(--color-text);
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  padding: 5px 10px;
+  transition: .2s;
+  align-items: center;
+  border-radius: $button-radius;
+  background-color: var(--color-button);
+}
+
+.MainSearch_example_card:hover{
+  transition: .0s;
+  background-color: var(--color-button-hover);
+}

@@ -31,7 +31,7 @@
   --color-navigation-icon: #ADB5BD;
   --color-navigation-hover: #e5e6e9;
 
-  --color-background: #EDEEF0;
+  --color-background: #FDFDFD;
   --color-background-text: #000000;
 
   --color-separator: #dbdbdb;
@@ -43,6 +43,7 @@
   --color-header-hover: #89898914;
   --color-header-border: #E7E8EC;
   --color-header-block: #89898914;
+  --color-header-block-hover: #89898923;
 
   --color-context-screen: #0808087d;
   --color-context-shadow: #0000001a;
@@ -54,14 +55,14 @@
 
   --color-block: #FFFFFF;
   --color-block-hover: #f9f9f9;
-  --color-block-hover_a12: #aeb7c21f;
+  --color-block-hover_a12: #d5d5d51f;
   --color-block-hover_soft: #fbfbfb;
   --color-block-blur: #ffffffa8;
   --color-block-secondary: #fbfbfb;
   --color-block-primary: #0077FF;
   --color-block-wrap: #f9f9f9;
   --color-block-text: #000000;
-  --color-block-border: #dce1e6;
+  --color-block-border: #cfcfcf54;
 
   --color-verify: #08c308;
 
@@ -73,8 +74,6 @@
   --color-button-hover: #e5e6e9;
   --color-button-text: #7a7a7a;
   --color-button-border: #dce1e6;
-  /*--color-button-primary: #3F78E1;
-  --color-button-primary-hover: #618cdc;*/
   --color-button-primary: #0077FF;
   --color-button-primary-hover: #258afd;
   --color-button-secondary: #61C963;

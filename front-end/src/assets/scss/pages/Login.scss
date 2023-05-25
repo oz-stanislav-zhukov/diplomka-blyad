@@ -1,0 +1,186 @@
+.LoginPanel{
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  align-items: stretch;
+  font-family: sans-serif!important;
+
+  @media (max-width: $content-mobile-max-width), (max-height: 600px){
+    width: 100%;
+    min-height: calc(100% - 52px);
+    border: 0;
+    position: absolute;
+    top: 52px;
+    left: 0;
+	}
+}
+
+.LoginPanel_image{
+  background-image: url(/engine/assets/img/background.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 50vw;
+  max-width: 700px;
+  margin-right: -$block-radius;
+  border-radius: $block-radius;
+  border: 1px solid var(--color-header-border);
+  background-color: var(--color-block);
+
+  @media (max-width: $content-mobile-max-width), (max-height: 600px){
+    background-size: cover;
+    width: 70%;
+    border: 0;
+    border-right: 1px solid var(--color-header-border);
+    border-radius: 0;
+    margin-right: 0;
+	}
+
+  @media (max-width: 520px){
+    border: 0;
+    width: 0;
+	}
+}
+
+.LoginPanel_wrapper{
+  gap: 20px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  width: 320px;
+  min-height: 500px;
+  border-radius: $block-radius;
+  border: 1px solid var(--color-header-border);
+  background-color: var(--color-block);
+  padding: 15px;
+
+  @media (max-width: $content-mobile-max-width), (max-height: 600px){
+    gap: 25px;
+		width: 100%;
+		height: auto;
+    min-height: auto;
+    border: 0;
+	}
+}
+
+.LoginPanel_header{
+  display: flex;
+  flex-direction: column;
+}
+
+.LoginPanel_title{
+  font-weight: 600;
+  user-select: none;
+  color: var(--color-text);
+}
+
+.LoginPanel_error{
+  font-size: 11px;
+  color: var(--color-error);
+}
+
+.LoginPanel_content{
+  gap: 15px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: center;
+  justify-content: flex-end;
+
+  @media (max-width: $content-mobile-max-width), (max-height: 600px){
+    justify-content: flex-end;
+	}
+}
+
+.LoginPanel_footer{
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.LoginPanel_row{
+  gap: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.LoginPanel_row_name{
+  font-weight: 600;
+  font-size: 11px;
+  user-select: none;
+  color: var(--color-text);
+}
+
+.LoginPanel_row_input{
+  border: 0;
+  background-color: var(--color-block);
+  border-radius: 6px;
+  margin: 0;
+  background-position: 10px;
+  background-repeat: no-repeat;
+  padding: 0 5px 0 10px;
+  box-sizing: border-box;
+  line-height: 28px;
+  width: 100%;
+  transition: .3s;
+  height: 34px;
+  border: 1px solid var(--color-header-border);
+  color: var(--color-header-text);
+  outline: none;
+}
+
+.LoginPanel_row_input:hover{
+  transition: .0s;
+  background-color: var(--color-block-hover);
+}
+
+.LoginPanel_row_input:focus{
+  border-color: var(--color-primary);
+}
+
+.LoginPanel_row_select{
+  cursor: pointer;
+  border: 0;
+  background-color: var(--color-block);
+  border-radius: 6px;
+  margin: 0;
+  background-position: 10px;
+  background-repeat: no-repeat;
+  padding: 0 5px 0 10px;
+  box-sizing: border-box;
+  line-height: 28px;
+  width: 100%;
+  transition: .3s;
+  height: 34px;
+  border: 1px solid var(--color-header-border);
+  color: var(--color-header-text);
+  outline: none;
+  font-size: 13px;
+  line-height: 16px;
+}
+
+.LoginPanel_row_select:hover{
+  transition: .0s;
+  background-color: var(--color-block-hover);
+}
+
+.LoginPanel_row_select:focus{
+  border-color: var(--color-primary);
+}
+
+.LoginPanel_button{
+  color: white;
+  cursor: pointer;
+  display: flex;
+  padding: 0 20px;
+  transition: .2s;
+  min-height: 34px;
+  align-items: center;
+  justify-content: center;
+  border-radius: $button-radius;
+  background-color: var(--color-button-primary);
+}
+
+.LoginPanel_button:hover{
+  background-color: var(--color-button-primary-hover);
+}

@@ -1,10 +1,14 @@
 <template>
-  <Particles v-if="!$vm.isMobile()"/>
+  <Particles v-if="!$vm.isMobile() && $config.visual.particles"/>
   <ShimmerEffect />
   
-  <Header ref="header"/>
-  <router-view />
-  <GDPR />
+  <SiteUnavailable v-if="$state.unsupported_format" error_name="format_error" :show_button="false" :show_title="false"/>
+  <template v-else>
+    <Header ref="header"/>
+    <Loading v-if="$state.user_loading"/>
+    <router-view v-else/>
+    <Footer />
+  </template>
 </template>
 
 <script>
@@ -16,10 +20,9 @@ import config from '@/config.js'
 import state from '@/state.js'
 import user from '@/userdata.js'
 
-import { CryptoGenPublic, getHash, Encrypt, Decrypt, SessionEncrypt, SessionDecrypt } from "@/modules/Crypto.js"
+import { CryptoGenPublic, getHash, Encrypt, Decrypt } from "@/modules/Crypto.js"
 import PageController from '@/modules/PageController.js'
 import { setLanguage, switchLang } from '@/modules/Language.js'
-//import WebSocket from '@/modules/WebSocket.js'
 import Functions from '@/modules/Functions.js'
 import Storage from '@/modules/Storage.js'
 import Device from '@/modules/Device.js'
@@ -28,9 +31,11 @@ import User from '@/modules/User.js'
 import Api from '@/modules/Api.js'
 
 import Header from '@/components/general/Header.vue'
+import Footer from '@/components/general/Footer.vue'
+import Loading from '@/pages/Loading.vue'
+import SiteUnavailable from '@/pages/Error.vue'
 import Particles from '@/components/effects/Particles.vue'
 import ShimmerEffect from '@/components/effects/ShimmerEffect.vue'
-import GDPR from '@/components/footers/GDPR.vue'
 
 var App = {
   name: 'App',
@@ -47,7 +52,8 @@ var App = {
     let isTablet = PageController.isTablet;
     let isMobile = PageController.isMobile;
 
-    app.config.globalProperties.$Crypto = {CryptoGenPublic, getHash, Encrypt, Decrypt, SessionEncrypt, SessionDecrypt};
+    window.PageController = PageController;
+    app.config.globalProperties.$Crypto = {CryptoGenPublic, getHash, Encrypt, Decrypt};
     app.config.globalProperties.$config = config;
     app.config.globalProperties.$state = state;
     app.config.globalProperties.$user = user;
@@ -63,15 +69,12 @@ var App = {
     app.config.globalProperties.$Func = Functions;
     app.config.globalProperties.$Lang = { switchLang };
     app.config.globalProperties.$vm = { isDesktop, isTablet, isMobile };
-    //app.config.globalProperties.$ws = WebSocket;
+
     return {
       $globals: getCurrentInstance().appContext.app.config.globalProperties
     }
   },
   created() {
-    this.$event.on("api-error-authed", () => { this.$router.push('/logout'); });
-    this.$event.on("change-state-authed", authed => { if(!authed) this.$router.push('/login'); });
-
     state.axios = this.axios;
     state.$event = this.$event;
     state.$route = this.$route;
@@ -79,35 +82,11 @@ var App = {
     state.$i18n = this.$i18n;
     state.$t = this.$t;
     
-    //console.log(this.$Crypto.Encrypt(config.apiData.client_key));
-    //console.log(this.$Crypto.Encrypt(config.apiData.client_secret));
-    
     Debug.created();
     Device.created();
     Functions.created();
     PageController.created();
-    Api.createSession();
     User.Init();
-
-    /*
-    this.$event.on("event-name", param => {
-      console.log(is);
-    });
-
-    this.$event.emit("event-name", "Hello");
-    */
-
-    /*WebSocket.eventSub('open', (event) => {
-      Debug.success('EVENTER', event);
-    });
-    WebSocket.eventSub('message', (data) => {
-      Debug.success('EVENTER2', data);
-    });
-    WebSocket.connect();
-    WebSocket.emit('message', { s1: 's1', s2: 's2' });
-    WebSocket.send('Name');*/
-
-    this.$router.afterEach(() => { this.$PageController.subpageMounted(); });
   },
   methods: {},
   mounted() {
@@ -125,9 +104,11 @@ var App = {
   },
   components: {
     Header,
+    Footer,
+    Loading,
+    SiteUnavailable,
     Particles,
     ShimmerEffect,
-    GDPR,
   }
 }
 

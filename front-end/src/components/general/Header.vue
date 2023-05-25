@@ -1,78 +1,151 @@
 <template>
-  <div class="page_head" v-if="isActive" :class="{seload: $state.loading || $state.api_loading, 'scrolled': scrolled}">
-    <div class="page_head_wrap">
-      <header id="p_header" class="page_header">
-        <ul class="HeaderNav">
-          <li class="HeaderNav_item logo">
-            <router-link class="TopHomeLink" to="/">
-              <p class="TopHomeTitle">{{ ($state.site.service.active && $state.site.service.name) ? $state.site.service.name : logoName }}</p>
+  <header @mouseleave="$PageController.CloseAllContexts()" v-if="isActive" id="Header" class="page_header" :class="{seload: $state.loading || $state.api_loading, scrolled: scrolled && !$state.site.mainmenu_active}">
+    <ul class="HeaderNav">
+      <li class="HeaderNav_item">
+        <router-link class="TopHomeLink" to="/">
+          <img class="TopHomeIco" :src="menu?.icon" />
+          <p class="TopHomeTitle">{{ menu?.name }}</p>
+        </router-link>
+      </li>
+      <li class="HeaderNav_item menu" :class="{active: $state.site.mainmenu_active}">
+        <template v-for="(m, index) in $config.menus.main.links" :key="`menu${index}`">
+          <template v-if="$User.isAdmin(m.admin_lvl)">
+            <router-link v-if="!m.url" :to="m.page" @click="CloseMobileMenu" class="TopNavBtn">
+              <i v-if="m.icon" :class="m.icon"></i>
+              <div class="TopNavBtn_text">{{ $t(`header.menus.${m.name}`) }}</div>
             </router-link>
-          </li>
-        </ul>
-      </header>
-    </div>
-  </div>
+            <a v-else :href="m.page" @click="CloseMobileMenu" target="_blank" class="TopNavBtn">
+              <i v-if="m.icon" :class="m.icon"></i>
+              <div class="TopNavBtn_text">{{ $t(`header.menus.${m.name}`) }}</div>
+            </a>
+          </template>
+        </template>
+        <template v-if="$vm.isMobile()">
+          <div class="page_separator"></div>
+          <Context @ContextClick="LanguageSelect" id="language_hmenu" :menu="languages_menu" myclass="languages_menu" />
+          <a @click="$PageController.ToggleContext('language_hmenu')" class="TopNavBtn" :class="{'hover': $state.site.context_id == 'language_hmenu'}">
+            <i class="bi bi-translate"></i>
+            <div class="TopNavBtn_text">{{$t('language.name')}}</div>
+          </a>
+          <a @click="$PageController.LoadTheme($state.user_settings.theme == 'light' ? 'dark' : 'light')" class="TopNavBtn">
+            <i class="bi bi-palette"></i>
+            <div class="TopNavBtn_text">{{$t(`general.themes.${$PageController.GetThemeID($state.user_settings.theme)}`)}}</div>
+          </a>
+        </template>
+      </li>
+      <li v-if="$vm.isMobile()" class="HeaderNav_item special">
+        <a @click="ToggleMobileMenu" class="TopNavBtn">
+          <i class="bi bi-three-dots-vertical"></i>
+        </a>
+      </li>
+      <li class="HeaderNav_item buttons">
+        <template v-if="!$vm.isMobile()">
+          <a @click="null" class="TopNavBtn" :class="{'hover': this.$state.site.context_id == 'cart_menu'}">
+            <i class="bi bi-cart"></i>
+          </a>
+          <Context @ContextClick="LanguageSelect" id="language_hmenu" :menu="languages_menu" myclass="languages_menu" />
+          <a @click="$PageController.ToggleContext('language_hmenu')" @mouseenter="$vm.isDesktop() ? $PageController.OpenContext('language_hmenu') : null" class="TopNavBtn" :class="{'hover': this.$state.site.context_id == 'language_hmenu'}">
+            <i class="bi bi-translate"></i>
+          </a>
+          <a @click="$PageController.LoadTheme($state.user_settings.theme == 'light' ? 'dark' : 'light')" class="TopNavBtn">
+            <i v-if="$state.user_settings.theme == 'light'" class="bi bi-lightbulb"></i>
+            <i v-else class="bi bi-lightbulb-fill"></i>
+          </a>
+          <!--a @click="$PageController.LoadTheme($state.user_settings.theme == 'light' ? 'dark' : 'light')" class="TopNavBtn">
+            <i class="bi bi-palette"></i>
+            <div class="TopNavBtn_text page_nomobile">{{$t(`general.themes.${$PageController.GetThemeID($state.user_settings.theme)}`)}}</div>
+          </a-->
+        </template>
+        <template v-if="!$state.user_loading">
+          <template v-if="!$User.isAuthed()">
+            <router-link to="/login" class="TopNavBtn">
+              <i class="bi bi-box-arrow-in-right"></i>
+              <div class="TopNavBtn_text page_nomobile">{{$t('connect.logIn')}}</div>
+            </router-link>
+            <router-link to="/registration" class="TopNavBtn">
+              <i class="bi bi-person-plus"></i>
+              <div class="TopNavBtn_text page_nomobile">{{$t('connect.register')}}</div>
+            </router-link>
+          </template>
+          <template v-else>
+            <router-link v-if="$route.path != '/profile'" to="/profile" class="TopNavBtn">
+              <div class="TopNavBtn_text">{{ $user.first_name }}</div>
+            </router-link>
+            <router-link v-else to="/logout" class="TopNavBtn">
+              <i class="bi bi-box-arrow-right"></i>
+              <div class="TopNavBtn_text page_nomobile">{{$t('connect.logOut')}}</div>
+            </router-link>
+          </template>
+        </template>
+      </li>
+    </ul>
+  </header>
 </template>
 
 <script>
+import Context from '@/components/general/Context.vue'
+
 export default {
-  name: 'AppHeader',
-  data(){
-    const index = this.$state.headers.length;
-
-    this.$state.headers[index] = {
-      active: true,
-      description: "Header",
-      logoName: this.logoName,
-      logoIco: this.$config.header.menus[this.menuName].icon,
-      searchActive: false,
-      menuName: this.menuName
-    };
-
-    return {
-      index,
-      scrolled: false,
-    }
-  },
-  created(){
-    window.addEventListener('scroll', this.handleScroll);
-  },
-  computed: {
-    isActive: function (){
-      return this.$state.headers[this.index].active;
-    }
-  },
+  name: "AppHeader",
   props: {
     menuName: {
       type: String,
-      default: "mainmenu"
+      default: "main",
     },
-    logoName: {
-      type: String,
-      default: "ozLEngine"
-    }
   },
-  beforeUnmount(){
-    if(this.$config.debug.enabled) this.$Debug.log('Header', 'Unmounted');
-    this.$state.headers.splice(this.index, 1);
+  data() {
+    let menu = this.$config.menus[this.menuName];
+
+    this.$state.page_state.header = {
+      active: true,
+      menu: this.menu,
+      menuName: this.menuName,
+    };
+
+    return {
+      menu: menu,
+      scrolled: false,
+      languages_menu: [],
+    };
+  },
+  created() {
+    window.addEventListener("scroll", this.HandleScroll);
+    this.LanguagesMenuUpdate();
   },
   methods: {
-    ToggleMobileMenu: function (){
-      this.CloseAll('mainmenu_active');
+		LanguagesMenuUpdate() {
+      for(var i = 0; i < this.$config.locale.languages.length; i++){
+        let lang = this.$config.locale.languages[i];
+        this.languages_menu.push({ name: lang.name, event: lang.id });
+      }
+		},
+    LanguageSelect(name){
+      this.$Lang.switchLang(this.$i18n, name);
+    },
+    ToggleMobileMenu() {
       this.$state.site.mainmenu_active = !this.$state.site.mainmenu_active;
     },
-    CloseAll: function (menu){
-      if(menu != 'mainmenu_active') this.$state.site.mainmenu_active = false;
+    CloseMobileMenu() {
+      this.$state.site.mainmenu_active = false;
     },
-    handleScroll() {
-      this.scrolled = (window.scrollY > 50);
-    }
+    HandleScroll() {
+      this.scrolled = window.scrollY > 50;
+    },
+  },
+  computed: {
+    isActive: function () {
+      return this.$state.page_state.header.active;
+    },
   },
   components: {
-    
+    Context
   }
-}
+};
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+.languages_menu {
+  min-width: 140px!important;
+  margin-left: 0!important;
+}
 </style>

@@ -1,0 +1,133 @@
+.page_header{
+  background-color: var(--color-header);
+  color: var(--color-header-text);
+  border-bottom: 1px solid var(--color-header-border);
+  height: 52px;
+  width: 100%;
+  z-index: 10000;
+  position: fixed;
+}
+
+.page_header.scrolled {
+  background-color: var(--color-header-blur);
+  backdrop-filter: blur(20px);
+}
+
+.HeaderNav{
+  display: flex;
+  height: inherit;
+  padding: 0;
+  width: $content-size-desktop-fhd;
+  margin: 0 auto;
+
+  @media (max-width: calc($content-size-desktop-fhd + 140px)){ width: $content-size-desktop-hd; }
+}
+
+.HeaderNav_item {
+  transition: .2s;
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+.HeaderNav_item.special {
+  gap: 5px;
+}
+
+.HeaderNav_item.menu {
+  gap: 5px;
+  transition: .2s;
+  overflow: hidden;
+
+  @media (max-width: $content-mobile-max-width){
+    transform: translateX(-101%);
+    position: fixed;
+    top: 52px;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 52px);
+    background-color: var(--color-block);
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    overflow-y: auto;
+  }
+}
+
+.HeaderNav_item.menu.active {
+  transform: translateX(0)!important;
+}
+
+.HeaderNav_item.menu .TopNavBtn{
+  @media (max-width: $content-mobile-max-width){
+    height: 42px;
+    width: 100%;
+  }
+}
+
+.HeaderNav_item.buttons {
+  gap: 5px;
+  flex-grow: 1;
+  justify-content: flex-end;
+}
+
+.TopHomeLink {
+  width: auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+  color: var(--color-primary);
+}
+
+.TopNavBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  color: var(--color-header-icon);
+  cursor: pointer;
+  flex-direction: row;
+  gap: 8px;
+  border-radius: $button-radius;
+  padding: 6px 15px;
+  width: auto;
+  height: auto;
+  transition: .2s;
+}
+
+.TopNavBtn:hover {
+  transition: .0s;
+  background-color: var(--color-header-hover);
+  color: var(--color-text)!important;
+}
+
+.TopNavBtn_text {
+  margin: 0;
+  overflow: hidden;
+  flex-grow: 1;
+  text-overflow: ellipsis;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: .4px;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.TopHomeLink .TopHomeIco {
+  width: 28px;
+  aspect-ratio: 1;
+  margin-right: 10px;
+  border-radius: 6px;
+}
+
+.TopHomeTitle {
+  color: var(--color-text);
+  font-size: 20px;
+  font-weight: 700;
+  white-space: nowrap;
+
+  @media (max-width: $content-mobile-middle-width){
+    font-size: 10px;
+  }
+}

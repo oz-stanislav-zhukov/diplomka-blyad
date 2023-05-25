@@ -1,0 +1,33 @@
+php_flag output_buffering on
+
+RewriteEngine On 
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^(.*)$ $1.html
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-l
+
+RewriteRule ^methods/([A-Za-z0-9_]+).([A-Za-z0-9_]+)$ _index?p1=$1&p2=$2&htr=1 [L,QSA]
+
+ErrorDocument 400 "{\"status\":\"error\",\"error_name\":\"bad_request\",\"error_msg\":\"The request cannot be understood by the server due to incorrect syntax.\"}"
+ErrorDocument 404 "{\"status\":\"error\",\"error_name\":\"method_not_found\",\"error_msg\":\"Method not found.\"}"
+ErrorDocument 403 "{\"status\":\"error\",\"error_name\":\"forbidden_method\",\"error_msg\":\"This method is not available to you.\"}"
+ErrorDocument 408 "{\"status\":\"error\",\"error_name\":\"request_timeout\",\"error_msg\":\"The site did not transmit a complete request within the specified time.\"}"
+ErrorDocument 429 "{\"status\":\"error\",\"error_name\":\"too_many_requests\",\"error_msg\":\"Too many requests sent in a short amount of time.\"}"
+ErrorDocument 500 "{\"status\":\"error\",\"error_name\":\"internal_server_error\",\"error_msg\":\"The server has encountered an unexpected condition that is preventing it from fulfilling the request.\"}"
+ErrorDocument 503 "{\"status\":\"error\",\"error_name\":\"service_unavailable\",\"error_msg\":\"An error occurred due to a temporary reboot or shutdown of the server for maintenance.\"}"
+ErrorDocument 505 "{\"status\":\"error\",\"error_name\":\"version_not_supported\",\"error_msg\":\"Server does not support HTTP version.\"}"
+ErrorDocument 507 "{\"status\":\"error\",\"error_name\":\"insufficient_storage\",\"error_msg\":\"The server cannot process the request due to lack of disk space.\"}"
+ErrorDocument 508 "{\"status\":\"error\",\"error_name\":\"loop_detected\",\"error_msg\":\"Infinite redirect detected.\"}"
+AddType application/x-httpd-php .php .htm .html
+
+<FilesMatch "^.*(([A-Za-z0-9_]+)\.ini|([A-Za-z0-9_]+)\.log|([A-Za-z0-9_]+)\.json|([A-Za-z0-9_]+)\.md|([A-Za-z0-9_]+)\.lock|\.htaccess|\.[hH][tT][aApP]\.*)$">
+Order deny,allow
+Deny from all
+</FilesMatch>

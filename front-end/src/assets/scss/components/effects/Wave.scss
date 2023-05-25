@@ -4,7 +4,7 @@
   background-clip: text;
   color: rgba(0,0,0,0.05);
   text-shadow: 0px 0px rgba(255,255,255,0.06);
-  animation: wave-animation 2s infinite linear, loading-animation 15s infinite linear alternate;
+  animation: wave-animation 2s infinite linear, loading-animation 5s infinite linear alternate;
   background-size: 1000px 1080px;
   background-repeat: repeat-x;
   opacity: 1;
@@ -32,6 +32,6 @@
   display: block;
   user-select: none;
   
-  @media (max-width: $ozk-content-mobile-max-width), (max-height: $ozk-content-mobile-max-height) { font-size: 30px; }
-  @media (max-width: $ozk-content-mobile-middle-width), (max-height: $ozk-content-mobile-middle-height) { font-size: 20px; }
+  @media (max-width: $content-mobile-max-width), (max-height: $content-mobile-max-height) { font-size: 30px; }
+  @media (max-width: $content-mobile-middle-width), (max-height: $content-mobile-middle-height) { font-size: 20px; }
 }

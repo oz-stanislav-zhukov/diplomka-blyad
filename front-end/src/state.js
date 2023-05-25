@@ -3,13 +3,10 @@ import { reactive } from 'vue'
 export default reactive({
   loading: true,
   api_loading: false,
-  page_loading: true,
   user_loading: false,
-  reauth_loading: false,
-  session_loading: false,
-  footer_enabled: false,
+  page_loading: true,
   server_unavailable: false,
-  session_unavailable: false,
+  unsupported_format: false,
 
   axios: null,
   $event: null,
@@ -22,18 +19,25 @@ export default reactive({
     mode: "desktop",
     view_mode: "desktop",
   },
-  player: {},
   user_settings: {
     theme: "light",
     language: "ru"
   },
+  
   page_state: {
+    header: {
+      active: false
+    },
+    footer: {
+      active: true
+    },
     width: 0,
     height: 0,
+    min_width: 280,
+    min_height: 360,
     active: 'Main',
     title: 'Main Page',
-    icon: '/engine/assets/ico/logo.png',
-    height_full: false
+    icon: '/engine/assets/ico/logo.png'
   },
 
   admin: {
@@ -45,19 +49,8 @@ export default reactive({
     context_id: "",
     context_blocked: {},
     mainmenu_active: false,
-    service: {
-      active: false,
-      hide_menu: true,
-      name: '',
-      back: null,
-      links: [],
-    },
     pages: {
       profile: {}
     },
-    bg: null,
-    suser: null,
-  },
-
-  headers: []
+  }
 })

@@ -1,0 +1,28 @@
+php_flag output_buffering on
+RewriteEngine On
+RewriteBase /
+
+RewriteCond %{REQUEST_URI} !^/app/ [NC]
+RewriteRule ^(.*)$ /app/$1 [L,QSA]
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^(.*)$ $1.html
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-l
+
+RewriteRule ^([A-Za-z0-9_]+)$ index.php [L,QSA]
+
+ErrorDocument 404 /notfound
+ErrorDocument 403 /error
+AddType application/x-httpd-php .php .htm .html
+
+<FilesMatch "^.*(([A-Za-z0-9_]+)\.ini|([A-Za-z0-9_]+)\.log|composer.json|([A-Za-z0-9_]+)\.md|([A-Za-z0-9_]+)\.lock|\.htaccess|\.[hH][tT][aApP]\.*)$">
+Order deny,allow
+Deny from all
+</FilesMatch>

@@ -1,6 +1,5 @@
 import config from '@/config.js'
 import state from '@/state.js'
-import user from '@/userdata.js'
 import { setLanguage } from '@/modules/Language.js'
 import Debug from '@/modules/Debug.js'
 import Storage from '@/modules/Storage.js'
@@ -18,12 +17,7 @@ export default {
     });
 
     let theme = Storage.get('theme');
-    if(theme != null) this.LoadTheme(theme);
-    Debug.log('Engine', theme);
-    
-    state.$event.on("user-loaded", () => {
-      this.LoadTheme(this.GetThemeName(user.settings.theme));
-    });
+    this.LoadTheme(theme ? theme : 'light');
   },
   update(){
     this.setTitle(state.page_state.title);
@@ -42,12 +36,10 @@ export default {
     document.getElementsByTagName('head')[0].appendChild(link);
     
     state.user_settings.theme = name;
-    if(user.authed) user.settings.theme = this.GetThemeID(state.user_settings.theme);
     Storage.set('theme', state.user_settings.theme);
   },
   ChangeTheme() {
     this.LoadTheme(state.user_settings.theme == 'light' ? 'dark' : 'light');
-    user.settings.theme = this.GetThemeID(state.user_settings.theme);
     Storage.set('theme', state.user_settings.theme);
     return state.user_settings.theme;
   },
@@ -74,7 +66,7 @@ export default {
     if(!newtitle) newtitle = state.$route.name;
     if(typeof(newtitle) == "undefined") return;
 
-    const name = state.$i18n.messages[state.$i18n.locale].headers.titles[newtitle];
+    const name = state.$i18n.messages[state.$i18n.locale].header.titles[newtitle];
     const math = typeof(name) != "undefined" && name !== null;
 
     document.querySelector("link[rel~='icon']").href = state.page_state.icon;
@@ -83,21 +75,20 @@ export default {
     state.page_state.title = newtitle;
     if(config.debug.page_state) Debug.log('Engine', `Set title: ${document.title} [${typeof(name)}, ${newtitle}, ${name}, ${math}]`);
   },
-  setHeaderVisibility(visible = true, index = 0){
-    state.headers[index].active = visible;
+  setHeaderVisibility(visible = true){
+    state.page_state.header.active = visible;
   },
   setFooterVisibility(visible = true){
-    state.footer_enabled = visible;
+    state.page_state.footer.active = visible;
   },
-  pageSettings(page = 'None', header = true, footer = false, icon = null, title = null) {
+  pageSettings(page = 'None', title = null, icon = null, footer = true) {
     if(title) this.setTitle(title);
     if(!icon) icon = '/engine/assets/ico/logo.png';
 
     state.page_state.active = page;
-    state.headers[0].active = header;
-    state.footer_enabled = footer;
     state.page_state.icon = icon;
 
+    state.page_state.footer.active = footer;
     document.querySelector("link[rel~='icon']").href = icon;
     if(config.debug.page_state) Debug.log('Engine', `Application reconfigured for ${state.page_state.active} page`);
   },
@@ -115,6 +106,7 @@ export default {
   UpdateViewMode() {
     state.page_state.width = window.innerWidth;
     state.page_state.height = window.innerHeight;
+    state.unsupported_format = state.page_state.height < state.page_state.min_height || state.page_state.width < state.page_state.min_width;
     
     if(window.innerWidth <= 900){
       state.platform.view_mode = 'mobile';
@@ -144,6 +136,10 @@ export default {
     state.site.context_id = '';
     setTimeout(() => { delete state.site.context_blocked[context_id]; }, 100);
   },
+  CloseAllContexts(){
+    state.site.context_blocked = [];
+    state.site.context_id = '';
+  },
   /**
    * Query
    */
@@ -171,30 +167,5 @@ export default {
     });
 
     state.$router.replace({ query });
-  },
-  /**
-   * Service
-   */
-  SetActiveService(service = null){
-    if(service) state.site.service.active = service;
-    else this.CloseService();
-  },
-  OpenService(name, hide_menu = false, back = '', links = []){
-    state.site.service = {
-      active: true,
-      hide_menu: hide_menu,
-      name: name,
-      back: back,
-      links: links,
-    };
-  },
-  CloseService(){
-    state.site.service = {
-      active: false,
-      hide_menu: false,
-      name: '',
-      back: null,
-      links: [],
-    };
   }
 }

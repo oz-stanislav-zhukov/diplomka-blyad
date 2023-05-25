@@ -8,37 +8,19 @@ export default reactive({
   },
   domains: {
     https: true,
-    wss: false,
-    local: false,
+    dev: true,
     host: window.location.host,
-    domain: (process.env.NODE_ENV === 'development') ? "localhost:8080" : (this.local ? "diplom.test" : "diplom.ozliginus.ru"),
+    domain: (process.env.NODE_ENV === 'development') ? "localhost:8080" : "diplom.ozliginus.ru",
     subdomain: window.location.host.split('.')[0],
-    authDomain: "auth.ozliginus.ru",
-    serverDomain: "server.ozliginus.ru",
-    connectDomain: "connect.ozliginus.ru",
-    accountDomain: "account.ozliginus.ru",
-    userapiDomain: "userapi.ozliginus.ru",
-    supportDomain: "support.ozliginus.ru",
-    socialDomain: "ozkontakt.ozliginus.ru",
-    apiDomain: "api.ozliginus.ru",
-    tsDomain: "ts.ozliginus.ru"
+    apiDomain: "diplom.ozliginus.ru/api",
+    apiDevDomain: "diplom.test/api"
   },
   apiData: {
     session_id: '',
-    client: 'ozl-diplom',
-    client_id: 6764248,
+    client: 'site-front',
+    client_id: 0,
     client_key: '',
-    client_secret: '',
     api_version: "5.2"
-  },
-  adminGroups: {
-    GROUPS_ADMIN_LEVEL_USER: 0,
-    GROUPS_ADMIN_LEVEL_VERIFIED_USER: 1,
-    GROUPS_ADMIN_LEVEL_MODERATOR: 2,
-    GROUPS_ADMIN_LEVEL_EDITOR: 3,
-    GROUPS_ADMIN_LEVEL_ADMINISTRATOR: 4,
-    GROUPS_ADMIN_LEVEL_DEVELOPER: 5,
-    GROUPS_ADMIN_LEVEL_HOST: 6
   },
   debug: {
     enabled: true,
@@ -46,43 +28,92 @@ export default reactive({
     page_state: false,
     api_log: false,
     api_error: true,
-    ws_info: false,
-    ws_log: false,
-    ws_error: true,
-    ws_message: false,
     sw_log: true,
     sw_error: true,
   },
   router: {
-    AllowUnAuthed: ['/login', '/'],
-    OnlyUnAuthed: ['/login'],
+    AllowUnAuthed: ['/login', '/registration', '/restore', '/', '/info', '/error', '/about', '/rules'],
+    OnlyUnAuthed: ['/login', '/registration', '/restore'],
   },
   locale: {
+    languages: [
+      { id: 'ru', name: 'Русский' },
+      { id: 'en', name: 'English' }
+    ],
     translit: {
       cyrillic: ['ru', 'kz', 'ua', 'by'],
       latin: ['en', 'kz-latin', 'de']
     }
   },
   visual: {
-    particles: true
+    particles: false
   },
-  header: {
-    menus: {
-			mainmenu: {
-				icon: "/engine/assets/ico/logo.png",
-				links: [
-					{
-						url: false,
-						name: 'main',
-						page: '/',
-					},
-					{
-						url: true,
-						name: 'ozProtect',
-						page: '//ozprotect.ozliginus.ru',
-					}
-				]
-			}
+  menus: {
+    main: {
+      name: "Unicode Store",
+      icon: "/engine/assets/ico/logo-primary.png",
+      links: [
+        {
+          url: false,
+          admin_lvl: 0,
+          name: 'main',
+          icon: '',
+          page: '/',
+        },
+        {
+          url: false,
+          admin_lvl: 1,
+          name: 'admin_panel',
+          icon: '',
+          page: '/cp/products',
+        },
+        {
+          url: false,
+          admin_lvl: 0,
+          name: 'rules',
+          icon: '',
+          page: '/rules',
+        },
+        {
+          url: false,
+          admin_lvl: 0,
+          name: 'about',
+          icon: '',
+          page: '/about',
+        }
+      ]
+    },
+    cp: {
+      links: [
+        {
+          url: false,
+          admin_lvl: 2,
+          name: 'products',
+          icon: 'bi bi-bag',
+          page: '/cp/products',
+        },
+        {
+          url: false,
+          admin_lvl: 3,
+          name: 'add_product',
+          icon: 'bi bi-bag-plus',
+          page: '/cp/product',
+        },
+        {
+          url: false,
+          admin_lvl: 2,
+          name: 'categories',
+          icon: 'bi bi-menu-button',
+          page: '/cp/categories',
+        },
+        {
+          url: false,
+          admin_lvl: 1,
+          name: 'reviews',
+          icon: 'bi bi-chat-left-text',
+          page: '/cp/reviews',
+        }
+      ]
     }
   }
 })

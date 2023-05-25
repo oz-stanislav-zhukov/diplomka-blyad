@@ -1,0 +1,6 @@
+{
+    "require": {
+        "monolog/monolog": "^3.1",
+        "symfony/mailer": "^6.1"
+    }
+}

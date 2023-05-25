@@ -11,6 +11,8 @@ import 'tippy.js/dist/tippy.css' // optional for styling
 import VueMobileDetection from "vue-mobile-detection";
 import Particles from "particles.vue3";
 import VueScrollTo from "vue-scrollto";
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
 
 /* App Modules */
 import App from '@/App.vue'
@@ -24,10 +26,11 @@ app.use(VueAxios, axios);
 app.use(VueMobileDetection);
 app.use(Particles);
 app.use(VueScrollTo);
+app.component('VueDatePicker', VueDatePicker);
 app.use(VueTippy, {
 	directive: 'tippy', // => v-tippy
 	component: 'tippy', // => <tippy/>
-	componentSingleton: 'tippy-singleton', // => <tippy-singleton/>,
+	componentSingleton: 'tippy-singleton',
 	defaultProps: {
 		placement: 'bottom',
 		allowHTML: true,

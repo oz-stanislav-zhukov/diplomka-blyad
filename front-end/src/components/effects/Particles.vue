@@ -44,7 +44,7 @@
         },
         links: {
           color: '#0077FF',
-          distance: 500,
+          distance: 200,
           enable: true,
           opacity: 0.1,
           width: 1
@@ -63,9 +63,9 @@
         number: {
           density: {
             enable: true,
-            area: 1200
+            area: 20
           },
-          value: this.$isMobile() ? 10 : 20
+          value: this.$isMobile() ? 1 : 2
         },
         opacity: {
           value: 0.1

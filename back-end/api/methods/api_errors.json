@@ -1,0 +1,25 @@
+{
+	"request_time_reached": "Request time reached.",
+	"no_access": "Access denied: you don't have access.",
+	"access_denied": "Access denied: no access to call this method.",
+	"unknown_error": "Server error: An unknown error has occurred.",
+	"database_error": "Server error: Error connecting to database.",
+	"longpoll_timeout": "Please submit your request again.",
+	"vehicle_insured": "This vehicle is already insured.",
+
+	"reg_error": "User registration failed.",
+	"auth_error": "User authorization failed: Wrong login or password.",
+	"login_busy": "User registration failed: This login is already in use.",
+	"token_not_found": "User authorization failed: access_token not found.",
+	"token_is_broken": "User authorization failed: access_token is broken.",
+	"token_invalid": "User authorization failed: invalid access_token.",
+	"token_no_passed": "User authorization failed: no access_token passed.",
+	"token_time_reached": "User authorization failed: access_token live time reached.",
+
+	"incorrect_app": "Incorrect application data",
+	"incorrect_method": "Incorrect method.",
+	"incorrect_version": "Incorrect engine version.",
+	"incorrect_client": "Incorrect client.",
+	"incorrect_data": "Incorrect data.",
+	"incorrect_id": "Incorrect id."
+}

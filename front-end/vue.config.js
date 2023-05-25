@@ -3,18 +3,18 @@ module.exports = {
   //mode: process.env.NODE_ENV,
   productionSourceMap: false,
   filenameHashing: true,
-	assetsDir: './engine/assets/',
+	assetsDir: './engine/',
   pwa: {
-    name: 'Diplomka',
+    name: 'Unicode Store',
     themeColor: '#ffffff',
     msTileColor: '#0077ff',
     appleMobileWebAppCapable: 'yes',
-    appleMobileWebAppStatusBarStyle: 'black',
+    appleMobileWebAppStatusBarStyle: 'white',
 
     manifestOptions: {
-      name: "Diplomka",
-      short_name: "Diplomka",
-      description: "Diplomka for PVKU college",
+      name: "Unicode Store",
+      short_name: "UStore",
+      description: "Graduation project for PVKU college",
       display: "standalone",
       theme_color: "#FFFFFF",
       background_color: "#FFFFFF",
@@ -22,23 +22,8 @@ module.exports = {
       start_url: "/",
       icons: [
         {
-          src: "/engine/assets/ico/android-chrome-192x192.png",
-          sizes: "192x192",
-          type: "image/png"
-        },
-        {
-          src: "/engine/assets/ico/android-chrome-256x256.png",
-          sizes: "256x256",
-          type: "image/png"
-        },
-        {
-          src: "/engine/assets/ico/android-chrome-384x384.png",
-          sizes: "384x384",
-          type: "image/png"
-        },
-        {
-          src: "/engine/assets/ico/android-chrome-512x512.png",
-          sizes: "512x512",
+          src: "/engine/assets/ico/android-chrome-144x144.png",
+          sizes: "144x144",
           type: "image/png"
         }
       ]
@@ -65,11 +50,6 @@ module.exports = {
         /\.jpg$/,
         /\.png$/
       ],
-      /*navigateFallbackBlacklist: [
-        new RegExp("^/_"),
-        new RegExp("/[^/]+\\.[^/]+$")
-      ],*/
-      //swDest: 'sw.js',
       sourcemap: false,
       //importWorkboxFrom: "cdn",
       cleanupOutdatedCaches: true,
@@ -88,27 +68,5 @@ module.exports = {
       }
 		}
 	},
-  /*configureWebpack: {
-    resolve: {
-      fallback: { "timers": require.resolve('timers/promises') }
-    },
-  },*/
-  /*configureWebpack: {
-    resolve: {
-      alias: {
-        Theme: 'White',
-      },
-   },
-  },
-  chainWebpack: config => {
-    const cssRule = config.module.rule('css')
-    cssRule.uses.clear()
-
-    config.module
-      .rule('css')
-      .test(/\.css$/)
-      .use('css-loader')
-      .loader('css-loader')
-  }*/
 }
   

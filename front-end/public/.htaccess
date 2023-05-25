@@ -20,4 +20,4 @@ ErrorDocument 404 /notfound
 AddType application/x-httpd-php .php .htm .html
 
 ServerSignature EMail
-SetEnv SERVER_ADMIN ozkontakt@ozliginus.ru
+SetEnv SERVER_ADMIN support@ozliginus.ru

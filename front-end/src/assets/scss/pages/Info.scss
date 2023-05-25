@@ -1,0 +1,589 @@
+.InfoCard {
+  gap: 10px;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  font-family: sans-serif!important;
+}
+.InfoCard.mw100{ max-width: 100%; }
+.InfoCard.mt40{ margin-top: 40px; }
+
+.InfoCard_image{
+  position: fixed;
+  background-image: url(/engine/assets/img/background.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  top: 60px;
+  right: calc(50% - 740px);
+  width: 1000px;
+  height: 600px;
+  margin-right: -6px;
+  border-radius: 6px;
+  z-index: -1;
+
+  @media (max-width: $content-mobile-max-width){ display: none; }
+}
+
+.InfoCard_title {
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--color-text);
+  
+  @media (max-width: $content-mobile-max-width){
+    font-size: 27px;
+    word-break: break-word;
+  }
+}
+
+.InfoCard_desc {
+  font-size: 15px;
+  color: var(--color-text);
+  
+  @media (max-width: $content-mobile-max-width){
+    font-size: 13px;
+  }
+}
+
+.InfoCard_error {
+  font-size: 15px;
+  color: var(--color-error);
+  
+  @media (max-width: $content-mobile-max-width){
+    font-size: 13px;
+  }
+}
+
+.InfoCard_bin {
+  font-size: 14px;
+  user-select: none;
+  font-family: monospace;
+  color: var(--color-text-selected);
+}
+
+.InfoCard_bin span{
+  cursor: pointer;
+}
+
+.InfoCard_wrapper{
+  gap: 10px;
+  display: flex;
+  margin-top: 20px;
+  flex-direction: column;
+  
+  @media (max-width: $content-mobile-max-width){
+    gap: 15px;
+  }
+}
+.InfoCard_wrapper.gap20{ gap: 20px; }
+
+.InfoCard_list{
+  gap: 2px;
+  max-width: 700px;
+  display: flex;
+  margin-top: 20px;
+  flex-direction: column;
+}
+
+.InfoCard_list .InfoCard_row{
+  flex-direction: row!important;
+}
+
+.InfoCard_list .InfoCard_row .InfoCard_row_data{
+  flex-grow: 1;
+  padding: 5px 10px;
+  transition: .1s;
+  user-select: none;
+  border-radius: $block-radius;
+  justify-content: space-between;
+}
+
+.InfoCard_list .InfoCard_row .InfoCard_row_data:hover{
+  transition: 0s;
+  background-color: var(--color-block-hover);
+}
+
+.InfoCard_text{
+  gap: 5px;
+  display: flex;
+  flex-direction: column;
+  color: var(--color-text);
+  
+  @media (max-width: $content-mobile-max-width){
+    align-items: flex-start;
+  }
+}
+
+.InfoCard_text_name{
+  font-size: 14px;
+  font-weight: 600;
+  min-width: 300px;
+  color: var(--color-primary);
+}
+
+.InfoCard_text_data{
+  margin-left: 15px;
+  gap: 5px;
+  display: flex;
+  font-size: 14px;
+  align-items: center;
+  flex-direction: row;
+  color: var(--color-text);
+}
+
+.InfoCard_row_i{
+  gap: 10px;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  color: var(--color-text);
+  
+  @media (max-width: $content-mobile-max-width){
+    align-items: flex-start;
+  }
+}
+.InfoCard_row_i.mt20{
+  margin-top: 20px;
+}
+.InfoCard_row_i i{
+  font-size: 20px;
+  color: var(--color-primary);
+}
+
+.InfoCard_row{
+  gap: 5px;
+  display: flex;
+  align-items: center;
+  
+  @media (max-width: $content-mobile-max-width){
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.InfoCard_row_name{
+  font-size: 14px;
+  width: 250px;
+  min-width: 250px;
+  color: var(--color-text);
+}
+
+.InfoCard_row_data{
+  gap: 5px;
+  display: flex;
+  font-size: 14px;
+  align-items: center;
+  flex-direction: row;
+  color: var(--color-text-primary);
+}
+
+.InfoCard_row_data_info{
+  display: flex;
+  font-size: 14px;
+  flex-direction: column;
+  color: var(--color-text-primary);
+}
+
+.InfoCard_row_data_info span{
+  font-size: 12px;
+  color: var(--color-text-selected);
+}
+
+.InfoCard_row_data .btn{
+  cursor: pointer;
+}
+
+.InfoCard_row_data > span{
+  font-size: 14px;
+  color: var(--color-text-selected);
+}
+
+.InfoCard_row_input2{
+  border: 0;
+  background-color: var(--color-block);
+  border-radius: 6px;
+  margin: 0;
+  background-position: 10px;
+  background-repeat: no-repeat;
+  padding: 0 5px 0 10px;
+  box-sizing: border-box;
+  line-height: 28px;
+  width: 100%;
+  max-width: 250px;
+  transition: .3s;
+  height: 32px;
+  border: 1px solid var(--color-header-border);
+  color: var(--color-header-text);
+  backdrop-filter: blur(2px);
+  outline: none;
+}
+
+.InfoCard_row_input{
+  border: 0;
+  background-color: var(--color-header-block);
+  border-radius: 6px;
+  margin: 0;
+  background-position: 10px;
+  background-repeat: no-repeat;
+  padding: 0 5px 0 10px;
+  box-sizing: border-box;
+  line-height: 28px;
+  width: 100%;
+  max-width: 250px;
+  transition: .3s;
+  height: 32px;
+  color: var(--color-header-text);
+  backdrop-filter: blur(2px);
+  outline: none;
+  
+  @media (max-width: $content-mobile-tablet){ max-width: 100%; }
+}
+
+.InfoCard_row_input:hover{
+  transition: .0s;
+  background-color: var(--color-header-block-hover);
+}
+
+.InfoCard_row_select{
+  cursor: pointer;
+  border: 0;
+  background-color: var(--color-header-block);
+  border-radius: 6px;
+  margin: 0;
+  background-position: 10px;
+  background-repeat: no-repeat;
+  padding: 0 5px 0 10px;
+  box-sizing: border-box;
+  line-height: 28px;
+  width: 100%;
+  max-width: 250px;
+  transition: .3s;
+  height: 32px;
+  color: var(--color-header-text);
+  backdrop-filter: blur(2px);
+  outline: none;
+  font-size: 13px;
+  line-height: 16px;
+  
+  @media (max-width: $content-mobile-tablet){ max-width: 100%; }
+}
+
+.InfoCard_row_select:hover{
+  transition: .0s;
+  background-color: var(--color-header-block-hover);
+}
+
+.InfoCard_button{
+  color: white;
+  cursor: pointer;
+  display: flex;
+  padding: 0 20px;
+  transition: .2s;
+  min-height: 32px;
+  overflow: hidden;
+  white-space: nowrap;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  border-radius: $button-radius;
+  background-color: var(--color-button-primary);
+
+  @media (max-width: $content-mobile-tablet){ width: 100%; max-width: 100%; }
+}
+
+.InfoCard_button:hover{
+  background-color: var(--color-button-primary-hover);
+}
+
+.InfoCard_row_number{
+  display: flex;
+  align-items: stretch;
+  border: 1px solid black;
+  border-right: 2px solid black;
+  border-left: 2px solid black;
+  border-radius: 6px;
+  overflow: hidden;
+  background-color: white;
+  color: black;
+}
+
+.InfoCard_row_number_flag{
+  display: flex;
+  flex-direction: column;
+  padding: 0 5px;
+  align-items: center;
+  justify-content: center;
+}
+
+.InfoCard_row_number_flag img{
+  aspect-ratio: 1;
+  width: 16px;
+}
+
+.InfoCard_row_number_flag span{
+  font-weight: bold;
+  font-size: 10px;
+  line-height: 1;
+}
+
+.InfoCard_row_number_i1{
+  width: 50px;
+  border: 0;
+  outline: none;
+  box-sizing: unset;
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  flex-grow: 1;
+  background-color: white;
+}
+
+.InfoCard_row_number_i2{
+  width: 50px;
+  border: 0;
+  outline: none;
+  box-sizing: unset;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  background-color: white;
+  height: 20px;
+  padding-top: 10px;
+  text-transform: uppercase;
+}
+
+.InfoCard_row_number_i3{
+  width: 44px;
+  border: 0;
+  border-left: 2px solid black;
+  outline: none;
+  box-sizing: unset;
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  background-color: white;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/*
+  ReviewCard
+*/
+.ReviewCard {
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  font-family: sans-serif!important;
+}
+
+.ReviewCard.mt40{
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.ReviewCard_title {
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--color-text);
+  
+  @media (max-width: $content-mobile-max-width){
+    font-size: 27px;
+    word-break: break-word;
+  }
+}
+
+.ReviewCard_message {
+  font-size: 15px;
+  color: var(--color-primary);
+  
+  @media (max-width: $content-mobile-max-width){
+    font-size: 13px;
+  }
+}
+
+.ReviewCard_wrapper{
+  gap: 10px;
+  display: flex;
+  margin-top: 10px;
+  flex-direction: column;
+  max-width: 700px;
+  
+  @media (max-width: $content-mobile-max-width){
+    gap: 15px;
+  }
+}
+
+.ReviewCard_block{
+  gap: 10px;
+  padding: 10px;
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  border-radius: $block-radius;
+  background-color: var(--color-block-blur);
+  border: 1px solid var(--color-block-border);
+  backdrop-filter: blur(2px);
+}
+
+.ReviewCard_header{
+  gap: 10px;
+  width: 100%;
+  display: flex;
+}
+
+.ReviewCard_image{
+  border-radius: 100%;
+  width: 40px;
+  height: 40px;
+}
+
+.ReviewCard_info{
+  flex-grow: 1;
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  justify-content: center;
+  user-select: none;
+}
+
+.ReviewCard_info_name{
+  font-size: 12px;
+  color: var(--color-text);
+}
+
+.ReviewCard_info_date{
+  font-size: 10px;
+  color: var(--color-text-selected);
+}
+
+.ReviewCard_buttons{
+  gap: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.ReviewCard_button{
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  transition: .2s;
+  border: 1px solid var(--color-header-border);
+}
+
+.ReviewCard_button:hover{
+  transition: 0s;
+  background-color: var(--color-block-hover);
+}
+
+.ReviewCard_body{
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.ReviewCard_body_text{
+  color: var(--color-text);
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  line-height: 1.5;
+  overflow: hidden;
+  word-wrap: break-word;
+  font-size: 15px;
+  font-weight: 400;
+  font-family: Roboto, sans-serif;
+}
+
+.ReviewCard_send{
+  gap: 5px;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.ReviewCard_send_input{
+  border: 0;
+  background-color: var(--color-header-block);
+  border-radius: 6px;
+  margin: 0;
+  background-position: 10px;
+  background-repeat: no-repeat;
+  padding: 0 5px 0 10px;
+  box-sizing: border-box;
+  line-height: 28px;
+  width: 100%;
+  max-width: 250px;
+  transition: .3s;
+  height: 32px;
+  color: var(--color-header-text);
+  outline: none;
+  
+  @media (max-width: $content-mobile-tablet){ max-width: 100%; }
+}
+
+.InfoCard_send_input:hover{
+  transition: .0s;
+  background-color: var(--color-header-block-hover);
+}
+
+.ReviewCard_send_textarea{
+  border: 0;
+  background-color: var(--color-header-block);
+  border-radius: 6px;
+  margin: 0;
+  background-position: 10px;
+  background-repeat: no-repeat;
+  padding: 0 5px 0 10px;
+  box-sizing: border-box;
+  line-height: 28px;
+  width: 100%;
+  min-width: 250px;
+  max-width: 100%;
+  transition: .3s;
+  height: 100px;
+  min-height: 32px;
+  max-height: 300px;
+  color: var(--color-header-text);
+  backdrop-filter: blur(2px);
+  outline: none;
+  
+  @media (max-width: $content-mobile-tablet){ max-width: 100%; }
+}
+
+.InfoCard_send_textarea:hover{
+  transition: .0s;
+  background-color: var(--color-header-block-hover);
+}
+
+.ReviewCard_send_button{
+  color: white;
+  cursor: pointer;
+  display: flex;
+  padding: 0 20px;
+  transition: .2s;
+  width: fit-content;
+  min-height: 32px;
+  overflow: hidden;
+  margin-top: 5px;
+  white-space: nowrap;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  border-radius: $button-radius;
+  background-color: var(--color-button-primary);
+
+  @media (max-width: $content-mobile-tablet){ width: 100%; max-width: 100%; }
+}
+
+.ReviewCard_send_button:hover{
+  background-color: var(--color-button-primary-hover);
+}

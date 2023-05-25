@@ -43,6 +43,7 @@
   --color-header-hover: #a5a5a514;
   --color-header-border: #282828;
   --color-header-block: #a5a5a514;
+  --color-header-block-hover: #a5a5a525;
 
   --color-context-screen: #0808087d;
   --color-context-shadow: #5a5a5a1a;
@@ -56,12 +57,12 @@
   --color-block-hover: #44444457;
   --color-block-hover_soft: #fbfbfb;
   --color-block-hover_a12: #6464641f;
-  --color-block-blur: #ffffffa8;
+  --color-block-blur: #00000024;
   --color-block-secondary: #202020;
   --color-block-primary: #0077FF;
   --color-block-wrap: #242424;
   --color-block-text: #F4F4F4;
-  --color-block-border: #272727;
+  --color-block-border: #38383833;
 
   --color-verify: #08c308;
 

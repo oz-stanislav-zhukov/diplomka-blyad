@@ -1,0 +1,25 @@
+.dp__main{
+  max-width: 250px;
+}
+
+.dp__theme_light{
+  --dp-background-color: var(--color-header-block);
+  --dp-text-color: var(--color-text);
+  --dp-hover-color: var(--color-header-block-hover);
+  --dp-hover-text-color: var(--color-text);
+  --dp-hover-icon-color: #959595;
+  --dp-primary-color: var(--color-primary);
+  --dp-primary-text-color: #f8f5f5;
+  --dp-secondary-color: #c0c4cc;
+  --dp-border-color: transparent;
+  --dp-menu-border-color: transparent;
+  --dp-border-color-hover: transparent;
+  --dp-disabled-color: #f6f6f6;
+  --dp-scroll-bar-background: #f3f3f3;
+  --dp-scroll-bar-color: #959595;
+  --dp-success-color: var(--color-success);
+  --dp-success-color-disabled: #a3d9b1;
+  --dp-icon-color: #959595;
+  --dp-danger-color: var(--color-error);
+  --dp-highlight-color: rgba(25, 118, 210, 0.1);
+}
