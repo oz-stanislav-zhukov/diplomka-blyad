@@ -47,7 +47,7 @@
                     <span class="price">{{ GetPrice }} ₸</span> <span v-if="product.discount" class="old">{{ GetFullPrice }} ₸</span>
                   </div>
                 </div>
-                <div class="StoreProduct_row">
+                <div v-if="product.desc[$i18n.locale]" class="StoreProduct_row">
                   <div class="StoreProduct_row_name">{{ $t('store.desc') }}</div>
                   <div class="StoreProduct_row_data">{{ product.desc[$i18n.locale] }}</div>
                 </div>
