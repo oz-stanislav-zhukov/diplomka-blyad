@@ -5,7 +5,6 @@
 	"unknown_error": "Server error: An unknown error has occurred.",
 	"database_error": "Server error: Error connecting to database.",
 	"longpoll_timeout": "Please submit your request again.",
-	"vehicle_insured": "This vehicle is already insured.",
 
 	"reg_error": "User registration failed.",
 	"auth_error": "User authorization failed: Wrong login or password.",

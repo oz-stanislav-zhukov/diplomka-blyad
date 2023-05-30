@@ -154,12 +154,6 @@
   flex-grow: 1;
   flex-wrap: wrap;
   align-content: flex-start;
-  /*
-  padding: 10px;
-  border-radius: 10px;
-  background-color: var(--color-block);
-  border: 1px solid var(--color-header-border);
-  */
 }
 
 .StoreBlock_cards.center{
@@ -175,12 +169,41 @@
 }
 
 /*
+ * Store Cards
+ */
+.StoreCard_images{
+  gap: 5px;
+  display: flex;
+  flex-direction: row;
+}
+
+.StoreCard_image{
+  aspect-ratio: 18/5;
+  flex-grow: 1;
+  border-radius: $block-radius;
+  background-color: var(--color-block);
+  border: 1px solid var(--color-header-border);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url('/engine/assets/img/background.png');
+
+  @media (max-width: $content-mobile-tablet){ width: 100%; max-width: 100%; }
+}
+.StoreCard_image.ar1_1{
+  aspect-ratio: 1/1;
+}
+.StoreCard_image.ar16_9{
+  aspect-ratio: 16/9;
+}
+
+/*
  * ProductBlock
  */
 .ProductBlock{
   width: calc(calc(100% - 30px) / 4);
   max-width: calc(calc(100% - 30px) / 4);
-  aspect-ratio: 8/12;
+  min-height: 300px;
   border-radius: $block-radius;
   background-color: var(--color-block);
   border: 1px solid var(--color-header-border);
@@ -189,10 +212,11 @@
   display: flex;
   flex-direction: column;
   
-  @media (max-width: 1400px){ width: calc(calc(100% - 20px) / 3); }
-  @media (max-width: 1100px){ width: calc(calc(100% - 10px) / 2); }
+  @media (max-width: 1400px){ width: calc(calc(100% - 20px) / 3); max-width: calc(calc(100% - 20px) / 3); }
+  @media (max-width: 1100px){ width: calc(calc(100% - 10px) / 2); max-width: calc(calc(100% - 10px) / 2); }
   @media (max-width: $content-mobile-middle-width){ width: 100%; max-width: 100%; }
 }
+.ProductBlock.seload{ aspect-ratio: 8/10; }
 .ProductBlock.mini{
   transition: .2s;
   flex-direction: row;
@@ -237,12 +261,16 @@
 }
 
 .ProductBlock_wrapper{
-  gap: 5px;
+  gap: 10px;
   display: flex;
   padding: 10px;
   flex-direction: column;
   justify-content: space-evenly;
   flex-grow: 1;
+}
+
+.ProductBlock.mini .ProductBlock_wrapper{
+  max-width: calc(100% - 140px);
 }
 
 .ProductBlock_meta{
@@ -251,14 +279,12 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  justify-content: space-between;
 }
 
 .ProductBlock_name{
   color: var(--color-text);
   font-size: 80%;
-  position: absolute;
-  max-height: calc(100% - 35px);
-  height: calc(100% - 35px);
   overflow: hidden;
   text-overflow: ellipsis;
   width: 100%;
@@ -280,8 +306,6 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  position: absolute;
-  bottom: 5px;
 }
 
 .ProductBlock.mini .ProductBlock_wrapper .ProductBlock_meta .ProductBlock_price{
@@ -307,6 +331,7 @@
 }
 
 .ProductBlock_buttons{
+  gap: 5px;
   display: flex;
   flex-direction: column;
 }
@@ -314,6 +339,30 @@
 .ProductBlock.mini .ProductBlock_buttons{
   justify-content: flex-end;
   flex-direction: row;
+}
+
+.ProductBlock_cart_wrapper{
+  gap: 5px;
+  display: flex;
+  flex-grow: 1;
+  user-select: none;
+}
+.ProductBlock_cart_counter{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  color: var(--color-text-selected)!important;
+  cursor: pointer;
+  flex-direction: row;
+  gap: 15px;
+  border-radius: $block-radius;
+  padding: 6px 15px;
+  width: auto;
+  height: 34px;
+  font-size: 14px;
+  transition: 0.2s;
+  background-color: var(--color-button);
 }
 
 .ProductBlock_button{
@@ -338,6 +387,26 @@
   transition: 0s;
   color: white!important;
   background-color: var(--color-button-primary-hover);
+}
+
+.ProductBlock_button.cart_added{
+  color: var(--color-text)!important;
+  background-color: var(--color-button);
+}
+
+.ProductBlock_button.cart_added:hover{
+  color: var(--color-text)!important;
+  background-color: var(--color-button-hover);
+}
+
+.ProductBlock_button.theme{
+  color: var(--color-text)!important;
+  background-color: var(--color-button);
+}
+
+.ProductBlock_button.theme:hover{
+  color: var(--color-text)!important;
+  background-color: var(--color-button-hover);
 }
 
 .ProductBlock_marks{
@@ -368,4 +437,233 @@
 .ProductBlock_mark.discount{
   color: white;
   background-color: var(--color-secondary);
+}
+
+/*
+ * Cart Info
+ */
+.CartInfo{
+  gap: 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: var(--color-block);
+  border: 1px solid var(--color-header-border);
+}
+
+.CartInfo_row{
+  gap: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.CartInfo_row_name{
+  width: 100%;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  font-family: sans-serif;
+  color: var(--color-primary);
+}
+
+.CartInfo_row_data{
+  width: 100%;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  font-family: sans-serif;
+  color: var(--color-text);
+}
+
+.CartInfo_price{
+  color: var(--color-text);
+  font-size: 90%;
+  max-height: 30px;
+  height: auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  gap: 8px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.CartInfo_price .price{
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 32px;
+  color: var(--color-text);
+}
+
+.CartInfo_price .old{
+  font-size: 18px;
+  line-height: 22px;
+  color: var(--color-text-selected);
+  text-decoration: line-through;
+}
+
+/*
+ * Store Product Info
+ */
+.StoreProduct_container{
+  gap: 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: var(--color-block);
+  border: 1px solid var(--color-header-border);
+}
+
+.StoreProduct_content{
+  gap: 15px;
+  display: flex;
+  flex-direction: row;
+  @media (max-width: $content-mobile-tablet){ flex-direction: column; }
+}
+
+.StoreProduct_content_left{
+  gap: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.StoreProduct_content_right{
+  gap: 15px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.StoreProduct_header{
+  gap: 15px;
+  display: flex;
+  flex-direction: row;
+}
+
+.StoreProduct_meta{
+  gap: 15px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.StoreProduct_buttons{
+  gap: 10px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.StoreProduct_marks{
+  gap: 5px;
+  display: flex;
+  flex-direction: row;
+}
+
+.StoreProduct_name{
+  width: 100%;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  font-family: sans-serif;
+  color: var(--color-text);
+}
+
+.StoreProduct_wrapper{
+  gap: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.StoreProduct_image_wrap{
+  gap: 10px;
+  display: flex;
+  flex-direction: row;
+}
+
+.StoreProduct_images{
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.StoreProduct_image{
+  width: 20vw;
+  aspect-ratio: 1/1;
+  border-radius: $block-radius;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url('/engine/assets/img/background.png');
+
+  @media (max-width: $content-mobile-tablet){ width: 100%; max-width: 100%; }
+}
+
+.StoreProduct_row{
+  gap: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.StoreProduct_row_name{
+  width: 100%;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  font-family: sans-serif;
+  color: var(--color-primary);
+}
+
+.StoreProduct_row_data{
+  width: 100%;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  font-family: sans-serif;
+  color: var(--color-text);
+}
+
+.StoreProduct_price{
+  color: var(--color-text);
+  font-size: 90%;
+  max-height: 30px;
+  height: auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  gap: 8px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.StoreProduct_price .price{
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 32px;
+  color: var(--color-text);
+}
+
+.StoreProduct_price .old{
+  font-size: 18px;
+  line-height: 22px;
+  color: var(--color-text-selected);
+  text-decoration: line-through;
 }

@@ -49,8 +49,8 @@ export default reactive({
     context_id: "",
     context_blocked: {},
     mainmenu_active: false,
-    pages: {
-      profile: {}
+    cart: {
+      products: []
     },
   }
 })

@@ -21,6 +21,10 @@
           </template>
         </template>
         <template v-if="$vm.isMobile()">
+          <router-link to="/cart" @click="CloseMobileMenu" class="TopNavBtn" :class="{'hover': this.$state.site.context_id == 'cart_menu'}">
+            <i class="bi bi-cart"></i>
+            <div class="TopNavBtn_text">{{$t('store.cart')}}</div>
+          </router-link>
           <div class="page_separator"></div>
           <Context @ContextClick="LanguageSelect" id="language_hmenu" :menu="languages_menu" myclass="languages_menu" />
           <a @click="$PageController.ToggleContext('language_hmenu')" class="TopNavBtn" :class="{'hover': $state.site.context_id == 'language_hmenu'}">
@@ -40,9 +44,12 @@
       </li>
       <li class="HeaderNav_item buttons">
         <template v-if="!$vm.isMobile()">
-          <a @click="null" class="TopNavBtn" :class="{'hover': this.$state.site.context_id == 'cart_menu'}">
+          <router-link to="/cart" class="TopNavBtn" :class="{'hover': this.$state.site.context_id == 'cart_menu'}">
             <i class="bi bi-cart"></i>
-          </a>
+          </router-link>
+          <!--a @click="null" class="TopNavBtn" :class="{'hover': this.$state.site.context_id == 'cart_menu'}">
+            <i class="bi bi-cart"></i>
+          </a-->
           <Context @ContextClick="LanguageSelect" id="language_hmenu" :menu="languages_menu" myclass="languages_menu" />
           <a @click="$PageController.ToggleContext('language_hmenu')" @mouseenter="$vm.isDesktop() ? $PageController.OpenContext('language_hmenu') : null" class="TopNavBtn" :class="{'hover': this.$state.site.context_id == 'language_hmenu'}">
             <i class="bi bi-translate"></i>

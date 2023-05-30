@@ -4,6 +4,20 @@
   display: flex;
   flex-direction: column;
   font-family: sans-serif!important;
+
+  padding: 15px;
+  border-radius: 10px;
+  background-color: var(--color-block);
+  border: 1px solid var(--color-header-border);
+  flex-grow: 1;
+
+	@media (max-width: $content-mobile-tablet) {
+		width: 100%;
+		padding: unset;
+		padding-top: 15px;
+		background-color: unset;
+		border: unset;
+	}
 }
 
 .RulesCard_title {

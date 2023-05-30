@@ -10,9 +10,9 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ "@/pages/About")
   },
   {
-    path: '/info',
-    name: 'info',
-    component: () => import(/* webpackChunkName: "info" */ "@/pages/Info")
+    path: '/pay',
+    name: 'pay',
+    component: () => import(/* webpackChunkName: "pay" */ "@/pages/Pay")
   },
   {
     path: '/rules',
@@ -23,6 +23,16 @@ const routes = [
     path: '/profile',
     name: 'profile',
     component: () => import(/* webpackChunkName: "profile" */ "@/pages/Profile")
+  },
+  {
+    path: '/cart',
+    name: 'cart',
+    component: () => import(/* webpackChunkName: "cart" */ "@/pages/Cart")
+  },
+  {
+    path: '/product/:id',
+    name: 'product',
+    component: () => import(/* webpackChunkName: "product" */ "@/pages/Product")
   },
 	{
 		path: '/cp',

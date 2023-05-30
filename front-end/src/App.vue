@@ -27,6 +27,7 @@ import Functions from '@/modules/Functions.js'
 import Storage from '@/modules/Storage.js'
 import Device from '@/modules/Device.js'
 import Debug from '@/modules/Debug.js'
+import Store from '@/modules/Store.js'
 import User from '@/modules/User.js'
 import Api from '@/modules/Api.js'
 
@@ -63,6 +64,7 @@ var App = {
     app.config.globalProperties.$Translit = new Translit();
     app.config.globalProperties.$Api = Api;
     app.config.globalProperties.$User = User;
+    app.config.globalProperties.$Store = Store;
     app.config.globalProperties.$Debug = Debug;
     app.config.globalProperties.$Storage = Storage;
     app.config.globalProperties.$Device = Device;
@@ -74,7 +76,7 @@ var App = {
       $globals: getCurrentInstance().appContext.app.config.globalProperties
     }
   },
-  created() {
+  async created() {
     state.axios = this.axios;
     state.$event = this.$event;
     state.$route = this.$route;
@@ -86,7 +88,8 @@ var App = {
     Device.created();
     Functions.created();
     PageController.created();
-    User.Init();
+    await User.Init();
+    Store.Init();
   },
   methods: {},
   mounted() {
