@@ -133,7 +133,8 @@ export default {
       if(!this.info.name.ru || !this.info.name.en || this.info.name.ru.length < 2 || this.info.name.en.length < 2) return this.Message(this.$t('store.enter.name'));
       if(!this.info.desc.ru || !this.info.desc.en || this.info.desc.ru.length < 4 || this.info.desc.en.length < 4) return this.Message(this.$t('store.enter.desc'));
       if(!this.info.image || this.info.image.length < 10) return this.Message(this.$t('store.enter.image'));
-      if(!this.info.price || this.info.price.length < 1) return this.Message(this.$t('store.enter.image'));
+      if(!this.info.price) this.info.price = Number(this.info.price.replace(' ', ''));
+      if(this.info.price.length < 1) return this.Message(this.$t('store.enter.image'));
 
       return true;
     },

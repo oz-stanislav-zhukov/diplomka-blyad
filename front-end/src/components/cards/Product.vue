@@ -120,17 +120,17 @@ export default {
   },
   computed: {
     GetPrice(){
-      return this.product.discount ? this.product.price - ((this.product.price / 100) * this.product.discount) : this.product.price;
+      return (this.product.discount ? this.product.price - ((this.product.price / 100) * this.product.discount) : this.product.price).toLocaleString();
     },
     GetFullPrice(){
-      return this.product.price;
+      return this.product.price.toLocaleString();
     },
     GetPriceCounted(){
       let price = this.product.discount ? this.product.price - ((this.product.price / 100) * this.product.discount) : this.product.price;
-      return this.product.cart_count ? price * this.product.cart_count : price;
+      return (this.product.cart_count ? price * this.product.cart_count : price).toLocaleString();
     },
     GetFullPriceCounted(){
-      return this.product.cart_count ? this.product.price * this.product.cart_count : this.product.price;
+      return (this.product.cart_count ? this.product.price * this.product.cart_count : this.product.price).toLocaleString();
     }
   }
 }

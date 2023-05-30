@@ -14,7 +14,7 @@
 
         <div v-if="categories.length > 0" class="InfoCard_list">
           <div v-for="category in categories" :key="`a${category.id}`" class="InfoCard_row">
-            <div v-if="category.id != -1" class="InfoCard_row_data"><i :class="category.icon ?? 'bi bi-x-lg'"></i> {{ category.name[$i18n.locale] }}<i @click="DeleteCategory(auto.id)" v-tippy="{size: 'small', placement: 'right', content: $t('store.delete_category')}" class="bi bi-x-lg red btn"></i></div>
+            <div v-if="category.id != -1" class="InfoCard_row_data"><i :class="category.icon ?? 'bi bi-x-lg'"></i> {{ category.name[$i18n.locale] }}<i @click="DeleteCategory(category.id)" v-tippy="{size: 'small', placement: 'right', content: $t('store.delete_category')}" class="bi bi-x-lg red btn"></i></div>
           </div>
         </div>
       </div>
@@ -55,8 +55,8 @@ export default {
       if(r.status == 'error') return this.$router.push(`/error?name=${r.error_name}`);
       else if(r.status == 'success') this.UpdateCategories();
     },
-    async DeleteCategory(auto_id){
-      let r = await this.$Api.query('store.deleteCategory', {}, { auto_id: auto_id });
+    async DeleteCategory(category_id){
+      let r = await this.$Api.query('store.deleteCategory', {}, { category_id: category_id });
       if(r.status == 'error') return this.$router.push(`/error?name=${r.error_name}`);
       else if(r.status == 'success') this.UpdateCategories();
     },

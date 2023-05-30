@@ -8,7 +8,7 @@
           </div>
           <div v-else class="StoreBlock_menu">
             <template v-for="(c, index) in categories" :key="`menu${index}`">
-              <a @click="SetCategory(index)" class="StoreBlock_menu_button">
+              <a @click="SetCategory(index)" class="StoreBlock_menu_button category" :class="{'selected': index == selected_category_index}">
                 <i :class="c.icon ? c.icon : 'bi bi-x-lg'"></i>
                 <div class="StoreBlock_menu_button_text">{{ c.name[$i18n.locale] }}</div>
               </a>
@@ -16,7 +16,7 @@
           </div>
         </div>
         <div class="StoreBlock_right" @mouseleave="$PageController.CloseAllContexts()">
-          <div class="StoreCard_images">
+          <div v-if="selected_category_index == 0" class="StoreCard_images">
             <div class="StoreCard_image" style="background-image: url(/engine/assets/img/1.png);"></div>
             <div class="StoreCard_image" style="background-image: url(/engine/assets/img/2.png);"></div>
           </div>
@@ -27,7 +27,7 @@
               <a @click="$PageController.ToggleContext('categories_menu')" class="StoreBlock_menu_button">
                 <i :class="categories[selected_category_index]?.icon"></i>
               </a>
-              <Context @ContextClick="SetCategory" id="categories_menu" :menu="categories_menu" myclass="categories_menu" />
+              <Context @ContextClick="SetCategory" id="categories_menu" :menu="categories_menu" myclass="categories_menu" gap="10" />
             </template>
             <div v-else class="StoreBlock_header_icon">
               <i :class="categories[selected_category_index]?.icon ? categories[selected_category_index].icon : 'bi bi-cart'"></i>
@@ -176,6 +176,9 @@ export default {
 </script>
 
 <style lang="scss">
+.categories_menu {
+  margin-left: -50px;
+}
 .sort_menu {
   min-width: 180px!important;
   margin: 60px 0 0 10px!important;

@@ -55,6 +55,10 @@
                   <div class="StoreProduct_row_name">{{ $t('store.in_stock') }}</div>
                   <div class="StoreProduct_row_data">{{ product.count }} {{ $t('store.sht') }}</div>
                 </div>
+                <div class="StoreProduct_row">
+                  <div class="StoreProduct_row_name">{{ $t('store.guarantee') }}</div>
+                  <div class="StoreProduct_row_data">{{ $tc('store.counters.monthes', product.guarantee) }}</div>
+                </div>
               </div>
             </div>
           </div>
@@ -96,10 +100,10 @@ export default {
   },
   computed: {
     GetPrice(){
-      return this.product.discount ? this.product.price - ((this.product.price / 100) * this.product.discount) : this.product.price;
+      return (this.product.discount ? this.product.price - ((this.product.price / 100) * this.product.discount) : this.product.price).toLocaleString();
     },
     GetFullPrice(){
-      return this.product.price;
+      return this.product.price.toLocaleString();
     },
   },
   mounted() { this.$PageController.pageMounted(); },

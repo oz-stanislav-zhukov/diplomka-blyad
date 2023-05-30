@@ -23,7 +23,7 @@
             </div>
           </div>
 
-          <div v-if="$state.site.cart.products.length > 0" class="CartInfo">
+          <div v-if="$state.site.cart.products.length > 0 && !loading" class="CartInfo">
             <div class="CartInfo_row">
               <div class="CartInfo_row_name">{{ $t('store.products_in_cart') }}</div>
               <div class="CartInfo_row_data">{{ $state.site.cart.products.length ?? 0 }}</div>
@@ -93,18 +93,18 @@ export default {
       let all_price = 0;
       this.$state.site.cart.products.forEach(product => {
         let price = product.discount ? product.price - ((product.price / 100) * product.discount) : product.price;
-        all_price += price;
+        all_price += price * product.cart_count;
       });
-      return all_price;
+      return all_price.toLocaleString();
     },
     GetAllFullPrice(){
       if(this.$state.site.cart.products.length < 1) return 0;
 
       let all_price = 0;
       this.$state.site.cart.products.forEach(product => {
-        all_price += product.price;
+        all_price += product.price * product.cart_count;
       });
-      return all_price;
+      return all_price.toLocaleString();
     },
   },
   mounted() { this.$PageController.pageMounted(); },

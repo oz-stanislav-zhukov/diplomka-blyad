@@ -194,7 +194,7 @@ class P_Store {
     foreach ($arr as $i => $r) {
       $product = self::GetProduct($r);
       $products[-1][] = $product;
-      $products[$r['category_id']][] = $product;
+      if($r['category_id'] >= 0) $products[$r['category_id']][] = $product;
     }
 
     return $products;
