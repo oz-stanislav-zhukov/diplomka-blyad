@@ -48,7 +48,7 @@
         <a v-else-if="product.count < 1" class="ProductBlock_button cart_added">
           <i class="bi bi-cart"></i> <span :class="{'page_nomobile': mini}">{{ $t('store.messages.no_in_stock') }}</span>
         </a>
-        <router-link v-else-if="$Store.IsInCart(product)" to="/cart" class="ProductBlock_button cart_added">
+        <router-link v-else-if="$User.isAuthed() && $Store.IsInCart(product)" to="/cart" class="ProductBlock_button cart_added">
           <i class="bi bi-cart"></i> <span :class="{'page_nomobile': mini}">{{ $t('store.in_cart2') }}</span>
         </router-link>
         <a v-else @click="Cart" class="ProductBlock_button cart">

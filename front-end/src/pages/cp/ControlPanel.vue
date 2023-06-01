@@ -27,6 +27,7 @@
         <ProductsPage v-else-if="$route.params.page == 'products'" />
         <CategoriesPage v-else-if="$route.params.page == 'categories'" />
         <ReviewsPage v-else-if="$route.params.page == 'reviews'" />
+        <OrdersPage v-else-if="$route.params.page == 'orders'" />
         <div v-else class="NotFound">
           <div class="NotFound_title">404</div>
           <div class="NotFound_desc">{{ $t('header.titles.not_found') }}</div>
@@ -38,6 +39,7 @@
 
 <script>
 import CategoriesPage from './Cotegories.vue'
+import OrdersPage from './Orders.vue'
 import ReviewsPage from './Reviews.vue'
 import ProductPage from './Product.vue'
 import ProductsPage from './Products.vue'
@@ -65,6 +67,7 @@ export default {
   beforeUnmount() { this.$PageController.pageUnmounted(); },
   components: {
     CategoriesPage,
+    OrdersPage,
     ReviewsPage,
     ProductPage,
     ProductsPage,

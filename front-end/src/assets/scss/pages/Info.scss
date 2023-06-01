@@ -28,7 +28,10 @@
 .InfoCard_title {
   font-size: 3rem;
   line-height: 1;
-  color: var(--color-text);
+  color: var(--color-text); 
+  width: fit-content;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--color-primary);
   
   @media (max-width: $content-mobile-max-width){
     font-size: 27px;
@@ -389,6 +392,9 @@ input::-webkit-inner-spin-button {
   font-size: 3rem;
   line-height: 1;
   color: var(--color-text);
+  width: fit-content;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--color-primary);
   
   @media (max-width: $content-mobile-max-width){
     font-size: 27px;
@@ -508,6 +514,7 @@ input::-webkit-inner-spin-button {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  margin-top: 10px;
 }
 
 .ReviewCard_send_input{

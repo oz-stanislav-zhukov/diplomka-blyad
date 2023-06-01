@@ -62,6 +62,20 @@
               </div>
             </div>
           </div>
+          <div class="ReviewCard mt40">
+            <div class="ReviewCard_title">{{ $t('info.reviews') }}</div>
+            <div v-if="message" class="ReviewCard_message">{{ message }}</div>
+
+            <div v-if="$User.isAuthed()" class="ReviewCard_send">
+              <input class="ReviewCard_send_input" v-model="review.name" type="text" maxlength="50" :placeholder="$t('info.enter_name')">
+              <textarea class="ReviewCard_send_textarea" v-model="review.text" type="text" maxlength="255" :placeholder="$t('info.enter_review')"></textarea>
+              <div @click="AddReview" class="ReviewCard_send_button">{{ $t('info.send') }}</div>
+            </div>
+
+            <div v-if="reviews.length > 0" class="ReviewCard_wrapper">
+              <Review v-for="review in reviews" :key="`r${review.id}`" :review="review" />
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -77,7 +91,12 @@ export default {
     return {
       loading: true,
       message: '',
-      product: null
+      product: null,
+      reviews: [],
+      review: {
+        name: '',
+        text: ''
+      }
     }
   },
   async created(){
@@ -85,6 +104,7 @@ export default {
     this.$PageController.pageSettings('Product', 'product');
     this.loading = true;
     await this.GetProduct();
+    await this.GetReviews();
     this.loading = false;
   },
   methods: {
@@ -93,6 +113,16 @@ export default {
       this.product = null;
       let r = await this.$Api.query('store.getProduct', {}, { id: this.$route.params.id, lang: this.$i18n.locale });
       if(r.status == 'success') this.product = r.response;
+    },
+    async GetReviews(){
+      let r = await this.$Api.query('info.getReviews', {}, { product_id: this.product.id, lang: this.$i18n.locale });
+      if(r.status == 'server_error' || r.status == 'error' || !r) return this.$router.push('/error');
+      this.reviews = r.response.reviews;
+    },
+    async AddReview(){
+      let r = await this.$Api.query('info.addReview', {}, { product_id: this.product.id, name: this.review.name, text: this.review.text });
+      if(r.status == 'server_error' || r.status == 'error' || !r) return this.$router.push('/error');
+      this.Message(this.$t('info.messages.moderate_review'));
     },
     Message(text = ''){
       this.message = text;

@@ -65,7 +65,7 @@ export default reactive({
           admin_lvl: 1,
           name: 'admin_panel',
           icon: '',
-          page: '/cp/products',
+          page: '/cp/orders',
         },
         {
           url: false,
@@ -85,6 +85,13 @@ export default reactive({
     },
     cp: {
       links: [
+        {
+          url: false,
+          admin_lvl: 2,
+          name: 'orders',
+          icon: 'bi bi-box',
+          page: '/cp/orders',
+        },
         {
           url: false,
           admin_lvl: 2,

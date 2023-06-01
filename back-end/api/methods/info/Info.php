@@ -25,8 +25,12 @@ class A_Info {
       if(Account::GetAdminLvl($user_id) >= 1) $is_admin = true;
     }
 
+    $args = ['status' => $is_admin ? (int) $_REQUEST['status'] : 1];
+    if(isset($_REQUEST['product_id'])) $args['product_id'] = (int) $_REQUEST['product_id'];
+    else if(!$is_admin) $args['product_id'] = -1;
+
     $response['reviews'] = array();
-    $reviews = Core::$MySql->SelectData('reviews', ['status' => $is_admin ? (int) $_REQUEST['status'] : 1], false, $limit, $offset, 'id');
+    $reviews = Core::$MySql->SelectData('reviews', $args, false, $limit, $offset, 'id');
     if($reviews) foreach($reviews as $review) $response['reviews'][] = P_Info::GetReview($review);
     return Configurator::Response($response);
   }
@@ -36,6 +40,7 @@ class A_Info {
 
     $r = Core::$MySql->Insert('reviews', [
       "user_id" => 0,
+      "product_id" => (int) ($_REQUEST['product_id'] ?? -1),
       "name" => $_REQUEST['name'],
       "text" => $_REQUEST['text'],
       "time" => time(),
@@ -56,6 +61,7 @@ class A_Info {
 
     $r = Core::$MySql->Insert('reviews', [
       "user_id" => $user_id,
+      "product_id" => (int) ($_REQUEST['product_id'] ?? -1),
       "name" => $_REQUEST['name'],
       "text" => $_REQUEST['text'],
       "time" => time(),
@@ -146,7 +152,7 @@ class P_Info {
     );
   }
 
-  public static function GetAccount(array $account){
+  public static function GetAccount(bool|array $account){
     if(!$account) return null;
 
     return array(

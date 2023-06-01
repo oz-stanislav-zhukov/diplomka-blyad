@@ -23,19 +23,6 @@
             </div>
           </div>
 
-          <div v-if="$state.site.cart.products.length > 0 && !loading" class="CartInfo">
-            <div class="CartInfo_row">
-              <div class="CartInfo_row_name">{{ $t('store.products_in_cart') }}</div>
-              <div class="CartInfo_row_data">{{ $state.site.cart.products.length ?? 0 }}</div>
-            </div>
-            <div class="CartInfo_row">
-              <div class="CartInfo_row_name">{{ $t('store.itogo') }}</div>
-              <div class="CartInfo_price">
-                <span class="price">{{ GetAllPrice }} ₸</span> <span class="old">{{ GetAllFullPrice }} ₸</span>
-              </div>
-            </div>
-          </div>
-
           <div class="StoreBlock_content">
             <div v-if="loading" class="StoreBlock_cards">
               <Product v-for="i in 1" :key="`p${i}`" :loading="loading" :mini="$state.page_state.width > 460" />
@@ -45,6 +32,19 @@
             </div>
             <div v-else class="StoreBlock_cards center">
               <div class="StoreBlock_cards_message">{{ $t('store.messages.no_proudcts') }}</div>
+            </div>
+          </div>
+
+          <div v-if="$state.site.cart.products.length > 0 && !loading" class="CartInfo">
+            <!--div class="CartInfo_row">
+              <div class="CartInfo_row_name">{{ $t('store.products_in_cart') }}</div>
+              <div class="CartInfo_row_data">{{ $state.site.cart.products.length ?? 0 }}</div>
+            </div-->
+            <div class="CartInfo_row">
+              <div class="CartInfo_row_name">{{ $t('store.itogo') }}</div>
+              <div class="CartInfo_price">
+                <span class="price">{{ GetAllPrice }} ₸</span> <span v-if="GetAllPrice != GetAllFullPrice" class="old">{{ GetAllFullPrice }} ₸</span>
+              </div>
             </div>
           </div>
         </div>

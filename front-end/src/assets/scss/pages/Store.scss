@@ -57,6 +57,12 @@
   color: var(--color-text) !important;
 }
 
+.StoreBlock_menu_button.rounded{
+  border: 0;
+  border-radius: $block-radius;
+  border: 1px solid var(--color-block-hover_a12);
+}
+
 .StoreBlock_menu_button.category{
   border: 0;
   border-left: 2px solid transparent;
@@ -119,7 +125,7 @@
   flex-direction: row;
   border-radius: 10px;
   background-color: var(--color-block);
-  border: 1px solid var(--color-header-border);
+  //border: 1px solid var(--color-header-border);
   user-select: none;
 }
 
@@ -222,7 +228,7 @@
   min-height: 300px;
   border-radius: $block-radius;
   background-color: var(--color-block);
-  border: 1px solid var(--color-header-border);
+  //border: 1px solid var(--color-header-border);
   transition: 0s;
   overflow: hidden;
   display: flex;
@@ -245,7 +251,8 @@
 .ProductBlock:hover:not(.seload){
   transition: 0s;
   cursor: pointer;
-  border: 1px solid var(--color-primary);
+  background-color: var(--color-block-hover_soft);
+  //border: 1px solid var(--color-primary);
   color: var(--color-text) !important;
 }
 
@@ -290,7 +297,7 @@
 }
 
 .ProductBlock_meta{
-  gap: 2px;
+  gap: 15px;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -308,8 +315,6 @@
   font-weight: 500;
 }
 .ProductBlock.mini .ProductBlock_wrapper .ProductBlock_meta .ProductBlock_name{
-  height: 100%;
-  max-height: 100%;
   font-size: 15px;
   font-weight: 500;
 }
@@ -464,8 +469,9 @@
   flex-direction: column;
   padding: 15px;
   border-radius: 10px;
-  background-color: var(--color-block);
-  border: 1px solid var(--color-header-border);
+  align-items: flex-end;
+  //background-color: var(--color-block);
+  //border: 1px solid var(--color-header-border);
 }
 
 .CartInfo_row{
@@ -484,6 +490,7 @@
   word-break: break-all;
   font-family: sans-serif;
   color: var(--color-primary);
+  text-align: end;
 }
 
 .CartInfo_row_data{
@@ -535,7 +542,7 @@
   padding: 15px;
   border-radius: 10px;
   background-color: var(--color-block);
-  border: 1px solid var(--color-header-border);
+  //border: 1px solid var(--color-header-border);
 }
 
 .StoreProduct_content{

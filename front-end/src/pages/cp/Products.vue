@@ -7,8 +7,8 @@
   <div class="StoreBlock_header" :class="{'seload': loading}" style="margin-top: 10px;">
     <template v-if="!loading">
       <Context @ContextClick="SetCategory" id="categories_menu" :menu="categories_menu" myclass="categories_menu" gap="10" />
-      <a @click="$PageController.ToggleContext('categories_menu')" class="StoreBlock_menu_button">
-        <i :class="categories[selected_category_index]?.icon"></i>
+      <a @click="$PageController.ToggleContext('categories_menu')" class="StoreBlock_menu_button rounded">
+        <i :class="categories[selected_category_index]?.icon ? categories[selected_category_index].icon : 'bi bi-list'"></i>
       </a>
     </template>
     <div v-else class="StoreBlock_header_icon">

@@ -23,6 +23,7 @@
 			"add_product": "Add product",
 			"categories": "Cotegories",
 			"product": "Product",
+			"orders": "Orders",
 			"pay": "Pay",
 			"paid": "Paid",
 
@@ -47,6 +48,7 @@
 			"products": "Products",
 			"add_product": "Add product",
 			"categories": "Cotegories",
+			"orders": "Orders",
 			"notfound": "404"
 		}
 	},
@@ -311,6 +313,7 @@
 		"address": "Legal address",
 		"filials": "Company branches",
 		"reviews": "Reviews",
+		"enter_name": "Enter your name",
 		"write_review": "Write a review",
 		"enter_review": "Write your review",
 		"send": "Send",

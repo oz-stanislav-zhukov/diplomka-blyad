@@ -25,7 +25,7 @@
           <div class="StoreBlock_header" :class="{'seload': loading}">
             <template v-if="!$vm.isDesktop() && !loading">
               <a @click="$PageController.ToggleContext('categories_menu')" class="StoreBlock_menu_button">
-                <i :class="categories[selected_category_index]?.icon"></i>
+                <i :class="categories[selected_category_index]?.icon ? categories[selected_category_index]?.icon : 'bi bi-list'"></i>
               </a>
               <Context @ContextClick="SetCategory" id="categories_menu" :menu="categories_menu" myclass="categories_menu" gap="10" />
             </template>
@@ -107,7 +107,7 @@ export default {
       let r = await this.$Api.query('store.getCategories', {}, { lang: this.$i18n.locale });
       if(r.status == 'success') this.categories = r.response;
       this.categories.forEach((c, i) => {
-        this.categories_menu.push({ name: c.name[this.$i18n.locale], event: `${i}` });
+        this.categories_menu.push({ name: c.name[this.$i18n.locale], event: `${i}`, ico: c.icon ? c.icon : 'bi bi-list' });
       });
     },
     async UpdateProducts(){

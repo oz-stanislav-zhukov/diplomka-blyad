@@ -8,7 +8,7 @@
   padding: 15px;
   border-radius: 10px;
   background-color: var(--color-block);
-  border: 1px solid var(--color-header-border);
+  //border: 1px solid var(--color-header-border);
   flex-grow: 1;
 
 	@media (max-width: $content-mobile-tablet) {
@@ -24,6 +24,9 @@
   font-size: 3rem;
   line-height: 1;
   color: var(--color-text);
+  width: fit-content;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--color-primary);
   
   @media (max-width: $content-mobile-max-width){
     font-size: 27px;

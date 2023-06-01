@@ -1,4 +1,5 @@
 import state from '@/state.js'
+import User from '@/modules/User.js'
 import Storage from '@/modules/Storage.js'
 
 export default {
@@ -39,8 +40,13 @@ export default {
     return this.GetProductIndexInCart(product) != -1;
   },
   AddInCart(product){
-    let exists = this.GetProductIndexInCart(product);
+    if(!User.isAuthed()) {
+      this.ClearCart();
+      state.$router.push('/login');
+      return;
+    }
 
+    let exists = this.GetProductIndexInCart(product);
     if(exists != -1){
       if(state.site.cart.products[exists]?.count > state.site.cart.products[exists]?.cart_count) state.site.cart.products[exists].cart_count++;
       else window.alert(state.$t('store.messages.not_add_in_cart'));
