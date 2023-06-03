@@ -15,11 +15,14 @@
         <div class="ProductBlock_name">
           {{ product.name[$i18n.locale] }}
         </div>
-        <div v-if="in_cart && product.cart_count" class="ProductBlock_price">
-          <span class="price">{{ GetPriceCounted }} ₸</span> <span v-if="product.discount" class="old" :class="{'page_nomobile': apanel}">{{ GetFullPriceCounted }} ₸</span>
-        </div>
-        <div v-else class="ProductBlock_price">
-          <span class="price">{{ GetPrice }} ₸</span> <span v-if="product.discount" class="old" :class="{'page_nomobile': apanel}">{{ GetFullPrice }} ₸</span>
+        <div>
+          <div v-if="in_cart && product.cart_count" class="ProductBlock_price">
+            <span class="price">{{ GetPriceCounted }} ₸</span> <span v-if="product.discount" class="old" :class="{'page_nomobile': apanel}">{{ GetFullPriceCounted }} ₸</span>
+          </div>
+          <div v-else class="ProductBlock_price">
+            <span class="price">{{ GetPrice }} ₸</span> <span v-if="product.discount" class="old" :class="{'page_nomobile': apanel}">{{ GetFullPrice }} ₸</span>
+          </div>
+          <div class="PricePanel_row_data" v-html="$t('store.do_bonus', [GetBonus().toLocaleString()])"></div>
         </div>
         <!--div class="ProductBlock_price">
           {{ $t('store.price') }}: <span class="price">{{ $tc('social.counter.money.kzt', 500) }}</span> <span class="old">1400</span> <span class="discount">50%</span>
@@ -113,6 +116,10 @@ export default {
     Cart(e){
       e.preventDefault();
       this.$emit('cart', this.product);
+    },
+    GetBonus(){
+      let bonus = Number((((this.product.discount ? this.product.price - ((this.product.price / 100) * this.product.discount) : this.product.price) / 100) * (this.product.bonus_percentage ?? 5)).toFixed());
+      return this.product.cart_count ? bonus * this.product.cart_count : bonus;
     },
     BlockClick(is_blocked = true){
       this.block_click = is_blocked;

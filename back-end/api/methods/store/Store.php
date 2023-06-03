@@ -7,21 +7,36 @@ use ozLEngine\Core\Functions;
 
 class A_Store {
   public static function pay(){
-    if(!Valider::isValidParams(['cart_id', 'price', 'products_id', 'info'])) return Configurator::getError('incorrect_data');
+    if(!Valider::isValidParams(['cart_id', 'price', 'products_data', 'info'])) return Configurator::getError('incorrect_data');
     $user_id = Valider::isValidToken();
 
     $cart_id = (int) $_REQUEST['cart_id'];  // Нет системы корзины
     $user_price = (int) $_REQUEST['price'];
-    $products_id = $_REQUEST['products_id'];
-    $products_id = explode(',', $products_id);
+    $products_data = explode(',', $_REQUEST['products_data']);
 
+    // [Считаем цену] =====
     $price = 0;
     $full_price = 0;
+    $products_id = array();
+    $products_count = array();
+    foreach ($products_data as $product_data) {
+      $data = explode('|', $product_data);
+      $products_id[] = $data[0];
+      $products_count[$data[0]] = $data[1];
+    }
+
+    $r = Core::$MySql->SelectIn('products', 'id', $products_id, false);
+    if($r) foreach($r as $product) {
+      $full_price += $product['price'] * $products_count[$product['id']];
+      $price += $product['discount'] ? ((($product['price'] / 100) * $product['discount']) * $products_count[$product['id']]) : ($product['price'] * $products_count[$product['id']]);
+    }
+    // [END] ==============
+
     $info = json_decode($_REQUEST['info'], true);
 
     $r = Core::$MySql->Insert('orders', [
       'user_id' => $user_id,
-      'products_id' => implode(',', $products_id),
+      'products_id' => implode(',', $products_data),
       'price' => (int) $price,
       'full_price' => (int) $full_price,
       'payment_type' => (int) $info['payment_type'],
@@ -116,6 +131,15 @@ class A_Store {
     return Configurator::Response($response);
   }
 
+  public static function getProductsByID(){
+    if(!Valider::isValidParams(['products_id'])) return Configurator::getError('incorrect_data');
+    $ids = explode(',', $_REQUEST['products_id']);
+    $response = array();
+    $r = Core::$MySql->SelectIn('products', 'id', $ids, false);
+    if($r) foreach($r as $product) $response[] = P_Store::GetProduct($product);
+    return Configurator::Response($response);
+  }
+
   public static function getProducts(){
     if(!Valider::isValidParams(['client'])) return Configurator::getError('incorrect_data');
     $limit = (int) ($_REQUEST['limit'] ?? 100000);
@@ -123,7 +147,7 @@ class A_Store {
     $limit = $limit <= 0 ? 0 : $limit;
     $offset = $offset <= 0 ? 0 : $offset;
 
-    $r = Core::$MySql->SelectData('products', ['is_disabled' => 0], false, $limit, $offset, 'id');
+    $r = Core::$MySql->SelectData('products', ['is_disabled' => 0, 'is_deleted' => 0], false, $limit, $offset, 'id');
     $response = P_Store::getProducts($r);
     return Configurator::Response($response);
   }
@@ -141,6 +165,16 @@ class A_Store {
     $r = Core::$MySql->SelectData('products', ['is_deleted' => 0], false, $limit, $offset, 'id');
     $response = P_Store::getProducts($r);
     return Configurator::Response($response);
+  }
+
+  public static function deleteProduct(){
+    if(!Valider::isValidParams(['product_id'])) return Configurator::getError('incorrect_data');
+    $user_id = Valider::isValidToken();
+    if(Account::GetAdminLvl($user_id) < 2) return Configurator::getError('access_denied');
+
+    if(isset($_REQUEST['force']) && (bool) $_REQUEST['force']) $r = Core::$MySql->Delete('products', ['id' => (int) $_REQUEST['product_id']]);
+    else $r = Core::$MySql->Update('products', 'id', (int) $_REQUEST['product_id'], ['is_deleted' => 1]);
+    return Configurator::Response($r);
   }
   
   public static function addProduct(){
@@ -250,6 +284,8 @@ class P_Store {
       "first_name" => $account['first_name'],
       "middle_name" => $account['middle_name'],
       "last_name" => $account['last_name'],
+      "phone" => $account['phone'],
+      "email" => $account['email'],
       "blocked" => (int) $account['blocked'],
       "online" => (int) $account['last_active_time']
     );
@@ -258,11 +294,27 @@ class P_Store {
   public static function GetOrder(array $order) : array {
     if(!$order) return null;
 
+    $products = array();
+    $products_id = array();
+    $products_count = array();
+    $products_data = explode(',', $order['products_id']);
+
+    foreach ($products_data as $product_data) {
+      $data = explode('|', $product_data);
+      $products_id[] = $data[0];
+      $products_count[$data[0]] = $data[1];
+    }
+
+    $r = Core::$MySql->SelectIn('products', 'id', $products_id, false);
+    if($r) foreach($r as $product) $products[] = self::GetProduct($product);
+
     return array(
       'id' => (int) $order['id'],
       'user_id' => (int) $order['user_id'],
       "user" => (int) $order['user_id'] ? self::GetAccount(Account::Get((int) $order['user_id'])) : null,
-      'products_id' => explode(',', $order['products_id']),
+      'products' => $products,
+      'products_id' => array_map('intval', $products_id),
+      'products_count' => array_map('intval', $products_count),
       'price' => (int) $order['price'],
       'full_price' => (int) $order['full_price'],
       'payment_type' => (int) $order['payment_type'],
@@ -296,6 +348,7 @@ class P_Store {
       "price" => (int) $r['price'],
       "discount" => (int) $r['discount'],
       "guarantee" => (int) $r['guarantee'],
+      "bonus_percentage" => (int) $r['bonus_percentage'],
       "category_id" => (int) $r['category_id'],
       "is_sale" => (bool) $r['is_sale'],
       "is_disabled" => (bool) $r['is_disabled'],

@@ -63,7 +63,10 @@
 
       <div class="InfoCard_wrapper">
         <div class="InfoCard_row">
-          <div v-if="edit_product_id != -1" @click="Edit" class="MainSearch_button">{{ $t('general.edit') }}</div>
+          <template v-if="edit_product_id != -1">
+            <div @click="Edit" class="MainSearch_button">{{ $t('general.edit') }}</div>
+            <div @click="Delete" class="MainSearch_button red" style="gap: 15px;"><i class="bi bi-trash"></i> {{ $t('store.delete') }}</div>
+          </template>
           <div v-else @click="Add" class="MainSearch_button">{{ $t('general.add') }}</div>
         </div>
       </div>
@@ -156,6 +159,16 @@ export default {
       
       this.loading = true;
       let r = await this.$Api.query('store.editProduct', {}, { info: JSON.stringify(this.info), id: this.edit_product_id });
+      this.loading = false;
+      if(r.status == 'error') this.$router.push(`/error?name=${r.error_name}`);
+      else if(r.status == 'success') this.$router.push(`/cp/products`);
+    },
+    async Delete(){
+      if(this.loading) return;
+      if(!confirm(this.$t('store.messages.delete_product'))) return;
+      
+      this.loading = true;
+      let r = await this.$Api.query('store.deleteProduct', {}, { product_id: this.edit_product_id });
       this.loading = false;
       if(r.status == 'error') this.$router.push(`/error?name=${r.error_name}`);
       else if(r.status == 'success') this.$router.push(`/cp/products`);

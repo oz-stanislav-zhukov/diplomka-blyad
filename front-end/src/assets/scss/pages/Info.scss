@@ -201,8 +201,31 @@
   color: var(--color-text-selected);
 }
 
+.InfoCard_row_card{
+  cursor: pointer;
+  gap: 10px;
+  display: flex;
+  flex-direction: row;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: 400;
+  background-color: var(--color-block);
+  border: 1px solid var(--color-block-border);
+  color: var(--color-text);
+  outline: none;
+  transition: .2s;
+  user-select: none;
+}
+.InfoCard_row_card:hover{
+  transition: 0;
+  background-color: var(--color-block-hover);
+}
+.InfoCard_row_card.mini{
+  padding: 5px 10px;
+}
+
 .InfoCard_row_input2{
-  border: 0;
   background-color: var(--color-block);
   border-radius: 6px;
   margin: 0;
@@ -506,6 +529,36 @@ input::-webkit-inner-spin-button {
   font-size: 15px;
   font-weight: 400;
   font-family: Roboto, sans-serif;
+}
+
+.ReviewCard_row{
+  gap: 5px;
+  display: flex;
+  flex-direction: row;
+}
+
+.ReviewCard_row_name{
+  width: 100%;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  font-family: sans-serif;
+  color: var(--color-text);
+}
+
+.ReviewCard_row_data{
+  width: 100%;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  font-family: sans-serif;
+  color: var(--color-primary);
 }
 
 .ReviewCard_send{

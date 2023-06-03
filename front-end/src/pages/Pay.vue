@@ -21,26 +21,28 @@
           <div class="InfoCard_wrapper">
             <div class="InfoCard_row">
               <div class="InfoCard_row_name">{{ $t('store.order.payment_type') }}</div>
-              <select class="InfoCard_row_select" v-model="info.payment_type">
-                <option v-for="i in 2" :key="`c${i}`" class="InfoCard_row_select_option" :value="i">{{ $t(`store.order.payment_types.${i}`) }}</option>
-              </select>
+              <div v-for="i in 2" :key="`c${i}`" @click="info.payment_type = i" class="InfoCard_row_card">
+                <i :class="[`bi bi-${i == 1 ? 'credit-card-2-front' : 'cash'}`, {'primary': info.payment_type == i}]"></i>
+                {{ $t(`store.order.payment_types.${i}`) }}
+              </div>
             </div>
             <div class="InfoCard_row">
               <div class="InfoCard_row_name">{{ $t('store.order.shipping_type') }}</div>
-              <select class="InfoCard_row_select" v-model="info.shipping_type">
-                <option v-for="i in 2" :key="`c${i}`" class="InfoCard_row_select_option" :value="i">{{ $t(`store.order.shipping_types.${i}`) }}</option>
-              </select>
+              <div v-for="i in 2" :key="`c${i}`" @click="info.shipping_type = i" class="InfoCard_row_card">
+                <i :class="[`bi bi-${i == 1 ? 'box' : 'truck'}`, {'primary': info.shipping_type == i}]"></i>
+                {{ $t(`store.order.shipping_types.${i}`) }}
+              </div>
             </div>
             <template v-if="info.shipping_type == 2">
               <div class="InfoCard_row">
                 <div class="InfoCard_row_name">{{ $t('store.order.delivery_time') }}</div>
-                <select class="InfoCard_row_select" v-model="info.delivery_time">
-                  <option v-for="i in 3" :key="`c${i-1}`" class="InfoCard_row_select_option" :value="i-1">{{ $t(`store.order.delivery_times.${i-1}`) }}</option>
-                </select>
+                <div v-for="i in 3" :key="`c${i}`" @click="info.delivery_time = i-1" class="InfoCard_row_card mini" :class="{'primary': info.delivery_time == i-1}">
+                  {{ $t(`store.order.delivery_times.${i-1}`) }}
+                </div>
               </div>
               <div class="InfoCard_row">
                 <div class="InfoCard_row_name">{{ $t('store.order.delivery_address') }}</div>
-                <input class="InfoCard_row_input" v-model="info.delivery_address" type="text" maxlength="50" :placeholder="$t('store.order.enter_delivery_address')">
+                <input class="InfoCard_row_input2" v-model="info.delivery_address" type="text" maxlength="50" :placeholder="$t('store.order.enter_delivery_address')">
               </div>
             </template>
             <template v-else>
@@ -94,13 +96,13 @@ export default {
       if(this.loading) return;
       if(this.info.shipping_type == 1) this.info.delivery_address = this.about.address;
       if(this.info.delivery_address.length < 5) return this.Message(this.$t('store.order.enter_delivery_address'));
-      this.products_id = [];
+      this.products_data = [];
 
       this.$state.site.cart.products.forEach(product => {
-        this.products_id.push(product.id);
+        this.products_data.push(`${product.id}|${product.cart_count ? product.cart_count : 1}`);
       });
 
-      let r = await this.$Api.query('store.pay', {}, { price: 0, cart_id: -1, products_id: this.products_id, info: JSON.stringify(this.info) });
+      let r = await this.$Api.query('store.pay', {}, { price: 0, cart_id: -1, products_data: this.products_data, info: JSON.stringify(this.info) });
       if(r.status != 'success') return this.$router.push('/error');
       this.paid = true;
       this.$PageController.pageSettings('Pay', 'paid');

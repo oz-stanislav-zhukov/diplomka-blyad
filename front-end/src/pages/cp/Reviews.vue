@@ -5,7 +5,7 @@
       <div v-if="message" class="ReviewCard_message">{{ message }}</div>
 
       <div v-if="reviews.length > 0" class="ReviewCard_wrapper">
-        <Review v-for="review in reviews" :key="`r${review.id}`" @update="UpdateReviews" :review="review" />
+        <Review v-for="review in reviews" :key="`r${review.id}`" @update="UpdateReviews" :review="review" :apanel="true" />
       </div>
     </div>
   </template>

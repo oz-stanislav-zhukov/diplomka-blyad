@@ -19,9 +19,9 @@ export default {
     if(max == 0) max = 1;
     return Math.floor(Math.random() * max) + 1;
   },
-  genCode: function (count = 16){
+  genCode: function (count = 16, is_number = false){
     let key = "";
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    var possible = is_number ? "0123456789" : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     for (var i = 0; i < count; i++) key += possible.charAt(Math.floor(Math.random() * possible.length));
     return key;
   },

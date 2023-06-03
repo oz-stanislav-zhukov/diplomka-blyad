@@ -220,6 +220,7 @@ export default {
       this.reviews = r.response.reviews;
     },
     async AddReview(){
+      if(this.review.text.length < 2) return this.Message(this.$t('info.enter_review'));
       let r = await this.$Api.query('info.addReview', {}, { name: this.review.name, text: this.review.text });
       if(r.status == 'server_error' || r.status == 'error' || !r) return this.$router.push('/error');
       this.Update();

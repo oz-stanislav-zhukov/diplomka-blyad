@@ -5,6 +5,10 @@
       <div class="ReviewCard_info">
         <div class="ReviewCard_info_name">{{ review.name }}</div>
         <div class="ReviewCard_info_date">{{ review.time ? GetDate(review.time) : '' }}</div>
+        <div v-if="apanel && review.product_id > -1" class="ReviewCard_info_date">
+          {{ $t('store.product_review.0') }}
+          <router-link :to="`/product/${review.product_id}`">{{ `${$t('store.product_review.1')} #${review.product_id}` }}</router-link>
+        </div>
       </div>
       <div v-if="$User.isAdmin(1)" class="ReviewCard_buttons">
         <i v-if="review.status == 0" @click="ModerateReview" v-tippy="{size: 'small', placement: 'right', content: $t('info.accept_review')}" class="bi bi-check-lg green ReviewCard_button"></i>
@@ -25,6 +29,10 @@ export default {
     review: {
       type: Object,
       default: null
+    },
+    apanel: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {

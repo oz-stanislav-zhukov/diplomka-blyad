@@ -83,6 +83,14 @@
   background-color: var(--color-button-primary-hover);
 }
 
+.MainSearch_button.red{
+  background-color: var(--color-button-error);
+}
+
+.MainSearch_button.red:hover{
+  background-color: var(--color-button-error-hover);
+}
+
 .MainSearch_example{
   gap: 10px;
   margin-top: 5px;

@@ -174,6 +174,7 @@ class P_Info {
     return array(
       "id" => (int) $review['id'],
       "user_id" => (int) $review['user_id'],
+      "product_id" => (int) $review['product_id'],
       "user" => (int) $review['user_id'] ? self::GetAccount(Account::Get((int) $review['user_id'])) : null,
       "name" => $review['name'],
       "text" => $review['text'],

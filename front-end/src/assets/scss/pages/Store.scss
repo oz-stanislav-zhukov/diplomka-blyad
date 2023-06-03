@@ -269,8 +269,10 @@
   border-bottom: 1px solid var(--color-header-border);
 }
 .ProductBlock.mini .ProductBlock_cover{
+  border: 0;
   width: unset;
   height: 140px;
+  border-right: 1px solid var(--color-header-border);
 }
 
 .ProductBlock_image{
@@ -297,7 +299,7 @@
 }
 
 .ProductBlock_meta{
-  gap: 15px;
+  gap: 5px;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -535,10 +537,19 @@
 /*
  * Store Product Info
  */
+.StoreProduct_wrap_container{
+  gap: 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  @media (max-width: $content-mobile-max-width){ flex-direction: column; align-items: unset; }
+}
+
 .StoreProduct_container{
   gap: 15px;
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
   padding: 15px;
   border-radius: 10px;
   background-color: var(--color-block);
@@ -585,6 +596,10 @@
   flex-direction: row;
   justify-content: flex-end;
 }
+.StoreProduct_buttons.price{
+  justify-content: center;
+  @media (max-width: $content-mobile-max-width){ justify-content: start; }
+}
 
 .StoreProduct_marks{
   gap: 5px;
@@ -614,6 +629,9 @@
   gap: 10px;
   display: flex;
   flex-direction: row;
+  overflow: hidden;
+  border-radius: $block-radius;
+  border: 1px solid var(--color-header-border);
 }
 
 .StoreProduct_images{
@@ -623,15 +641,20 @@
 }
 
 .StoreProduct_image{
+  transition: .3s;
   width: 20vw;
   aspect-ratio: 1/1;
-  border-radius: $block-radius;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   background-image: url('/engine/assets/img/background.png');
 
   @media (max-width: $content-mobile-tablet){ width: 100%; max-width: 100%; }
+}
+
+.StoreProduct_image:hover{
+  transition: .2s;
+  transform: scale(1.5);
 }
 
 .StoreProduct_row{
@@ -689,4 +712,181 @@
   line-height: 22px;
   color: var(--color-text-selected);
   text-decoration: line-through;
+}
+
+/*
+ * Price Panel
+ */
+ .PricePanel{
+  width: 400px;
+  min-width: 400px;
+  gap: 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: var(--color-block);
+  //border: 1px solid var(--color-header-border);
+  @media (max-width: $content-mobile-max-width){ width: 100%; min-width: 100%; }
+}
+
+.PricePanel_header{
+  gap: 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.PricePanel_text_vendor_code{
+  flex-grow: 1;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.PricePanel_text_low_price{
+  gap: 5px;
+  display: flex;
+  align-items: center;
+  font-size: 11px;
+  color: var(--color-text-selected);
+}
+
+.PricePanel_text_low_price i{
+  font-size: 14px;
+  color: var(--color-secondary);
+}
+
+.PricePanel_row{
+  gap: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.PricePanel_row_name{
+  gap: 5px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  font-size: 13px;
+  line-height: 22px;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  font-family: sans-serif;
+  color: var(--color-text);
+}
+
+.PricePanel_row_name i{
+  margin-right: 5px;
+  font-size: 16px;
+  color: var(--color-primary);
+}
+
+.PricePanel_row_name span{
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.PricePanel_row_data{
+  gap: 5px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  font-family: sans-serif;
+  color: var(--color-text-selected);
+}
+
+.PricePanel_row_data i{
+  margin-right: 5px;
+  font-size: 16px;
+  color: var(--color-primary);
+}
+
+.PricePanel_row_data span{
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.StoreProduct_buttons.price .StoreBlock_menu_button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  width: 100%;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background-color: var(--color-button-primary);
+}
+.StoreProduct_buttons.price .StoreBlock_menu_button .StoreBlock_menu_button_text{
+  color: white;
+  font-size: 13px;
+  line-height: 22px;
+  font-weight: 600;
+  font-family: sans-serif;
+  font-style: normal;
+  text-align: center;
+  flex-grow: unset;
+  width: fit-content;
+}
+.StoreProduct_buttons.price .StoreBlock_menu_button:hover{
+  background-color: var(--color-button-primary-hover);
+}
+.StoreProduct_buttons.price .StoreBlock_menu_button:hover .StoreBlock_menu_button_text{
+  color: white!important;
+}
+.StoreProduct_buttons.price .StoreBlock_menu_button i{
+  color: white!important;
+}
+
+
+/*
+ * Order Card
+ */
+.OrderCard_products{
+  padding: 20px 0 10px 0;
+  gap: 10px;
+  display: flex;
+  flex-direction: row;
+  overflow-y: auto;
+}
+
+.OrderCard_product{
+
+}
+
+.OrderCard_image_wrap{
+  gap: 10px;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  border-radius: $block-radius;
+  border: 1px solid var(--color-header-border);
+  position: relative;
+}
+
+.OrderCard_image{
+  cursor: pointer;
+  transition: .3s;
+  width: 100px;
+  aspect-ratio: 1/1;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url('/engine/assets/img/background.png');
+
+  @media (max-width: $content-mobile-tablet){ width: 100%; max-width: 100%; }
+}
+
+.OrderCard_image:hover{
+  transform: scale(1.1);
 }
