@@ -27,6 +27,7 @@ function initRouter(){
   });
   
   router.beforeEach((to, from, next) => {
+    if (to.path.indexOf('/info/') != -1) next()
     if (to.path.indexOf('/product/') != -1) next()
     else if (config.router.AllowUnAuthed.indexOf(to.path) == -1 && !User.isLogined()) next({ path: '/login' })
     else if (config.router.OnlyUnAuthed.indexOf(to.path) != -1 && User.isLogined()) next({ path: '/' })
