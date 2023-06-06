@@ -22,7 +22,7 @@
         </div>
       </div>
       <div class="page_content_right" @mouseleave="$PageController.CloseAllContexts()">
-        <InsurancePage v-if="typeof $route.params.page == 'undefined'" />
+        <OrdersPage v-if="typeof $route.params.page == 'undefined'" />
         <ProductPage v-else-if="$route.params.page == 'product'" :edit_product_id="$route.query.id ?? -1" />
         <ProductsPage v-else-if="$route.params.page == 'products'" />
         <CategoriesPage v-else-if="$route.params.page == 'categories'" />

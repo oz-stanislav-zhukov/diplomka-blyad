@@ -38,6 +38,12 @@ export default {
   background-size: 1000px 100%;
 }
 
+.hload {
+  animation : shimmer 1.5s infinite;
+  background: linear-gradient(to right, var(--color-shimmer-header-background) 4%, var(--color-shimmer-header-effect) 25%, var(--color-shimmer-header-background) 36%);
+  background-size: 1000px 100%;
+}
+
 .seloadtext {
   animation : shimmer 1.5s infinite;
   background: linear-gradient(to right, var(--color-shimmer-background) 4%, var(--color-shimmer-effect) 25%, var(--color-shimmer-background) 36%);

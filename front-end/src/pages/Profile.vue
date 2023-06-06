@@ -7,6 +7,9 @@
           
           <div class="InfoCard_wrapper">
             <div class="InfoCard_row">
+              <img :src="$user?.avatar ? $user?.avatar : `/engine/assets/img/image.png`" class="InfoCard_row_avatar" />
+            </div>
+            <div class="InfoCard_row">
               <div class="InfoCard_row_name">{{ $t('social.first_name') }}</div>
               <input class="InfoCard_row_input" v-model="info.first_name" type="text" maxlength="16" :placeholder="$t('social.enter.first_name')">
             </div>
@@ -107,7 +110,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scope>
+<style lang="scss" scoped>
 .InfoCard_row{
   justify-content: space-between;
 }

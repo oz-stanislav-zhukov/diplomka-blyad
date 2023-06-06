@@ -18,7 +18,7 @@
               </a>
               <a @click="Pay" class="StoreBlock_menu_button">
                 <i class="bi bi-credit-card-2-front"></i>
-                <div class="StoreBlock_menu_button_text page_nomobile">{{ $t('store.pay') }}</div>
+                <div class="StoreBlock_menu_button_text page_nomobile">{{ $t('store.checkout') }}</div>
               </a>
             </div>
           </div>

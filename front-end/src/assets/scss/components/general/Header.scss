@@ -1,14 +1,25 @@
 .page_header{
   background-color: var(--color-header);
   color: var(--color-header-text);
-  border-bottom: 1px solid var(--color-header-border);
+  //border-bottom: 1px solid var(--color-header-border);
   height: 80px;
   width: 100%;
   z-index: 10000;
   position: fixed;
+  transition: .2s;
+  backdrop-filter: blur(20px);
+
+  @media (max-width: $content-mobile-max-width){
+    backdrop-filter: unset;
+  }
 }
 
 .page_header.scrolled {
+  background-color: var(--color-header-blur);
+  backdrop-filter: blur(20px);
+}
+
+.page_header.blured {
   background-color: var(--color-header-blur);
   backdrop-filter: blur(20px);
 }
@@ -85,7 +96,6 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  color: var(--color-header-icon);
   cursor: pointer;
   flex-direction: column;
   border-radius: $button-radius;
@@ -93,16 +103,43 @@
   width: auto;
   height: auto;
   transition: .2s;
+  color: var(--color-header-text)!important;
+
   @media (max-width: $content-mobile-max-width){
     gap: 10px;
     flex-direction: row;
+    color: var(--color-text)!important;
   }
 }
 
 .TopNavBtn:hover {
   transition: .0s;
-  background-color: var(--color-header-hover);
-  color: var(--color-text)!important;
+  background-color: var(--color-header-btn-hover);
+  color: var(--color-header-text)!important;
+}
+
+.TopNavBtn i {
+  color: var(--color-header-icon)!important;
+}
+
+.TopNavBtn i.selected {
+  color: var(--color-header-text)!important;
+}
+
+.HeaderNav_item.menu .TopNavBtn i {
+  color: var(--color-header-icon)!important;
+
+  @media (max-width: $content-mobile-max-width){
+    color: var(--color-primary)!important;
+  }
+}
+
+.HeaderNav_item.menu.TopNavBtn i.selected {
+  color: var(--color-header-text)!important;
+
+  @media (max-width: $content-mobile-max-width){
+    color: var(--color-primary)!important;
+  }
 }
 
 .TopNavBtn_text {
@@ -115,6 +152,13 @@
   letter-spacing: .4px;
   align-items: center;
   white-space: nowrap;
+  color: var(--color-header-text);
+}
+
+.HeaderNav_item.menu .TopNavBtn_text {
+  @media (max-width: $content-mobile-max-width){
+    color: var(--color-text);
+  }
 }
 
 .TopNavBtn_desc {
@@ -131,14 +175,14 @@
 }
 
 .TopHomeLink .TopHomeIco {
-  width: 28px;
+  width: 58px;
   aspect-ratio: 1;
   margin-right: 10px;
   border-radius: 6px;
 }
 
 .TopHomeTitle {
-  color: var(--color-text);
+  color: var(--color-header-text);
   font-size: 20px;
   font-weight: 700;
   white-space: nowrap;

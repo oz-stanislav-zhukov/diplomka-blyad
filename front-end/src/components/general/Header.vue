@@ -1,9 +1,9 @@
 <template>
-  <header @mouseleave="$PageController.CloseAllContexts()" v-if="isActive" id="Header" class="page_header" :class="{seload: $state.loading || $state.api_loading, scrolled: scrolled && !$state.site.mainmenu_active}">
+  <header @mouseleave="$PageController.CloseAllContexts()" v-if="isActive" id="Header" class="page_header" :class="{hload: ($state.loading || $state.api_loading) && !isBlured, scrolled: scrolled && !$state.site.mainmenu_active, blured: isBlured}">
     <ul class="HeaderNav">
       <li class="HeaderNav_item">
         <router-link class="TopHomeLink" to="/">
-          <img class="TopHomeIco" :src="menu?.icon" />
+          <img class="TopHomeIco" :src="`${menu?.icon}${$state.user_settings.theme == 'light' ? '' : '-primary'}.png`" />
           <p class="TopHomeTitle">{{ menu?.name }}</p>
         </router-link>
       </li>
@@ -11,7 +11,7 @@
         <template v-for="(m, index) in $config.menus.main.links" :key="`menu${index}`">
           <template v-if="$User.isAdmin(m.admin_lvl)">
             <router-link v-if="!m.url" :to="m.page" @click="CloseMobileMenu" class="TopNavBtn">
-              <i v-if="m.icon" :class="[m.icon, {'primary': $route.href == m.page || (m.page != '/' && $route.href?.indexOf(m.page) !== -1)}]"></i>
+              <i v-if="m.icon" :class="[m.icon, {'selected': $route.href == m.page || (m.page != '/' && $route.href?.indexOf(m.page) !== -1)}]"></i>
               <div class="TopNavBtn_text">{{ $t(`header.menus.${m.name}`) }}</div>
               <!--div class="TopNavBtn_desc">{{ m.page }}</div-->
             </router-link>
@@ -52,10 +52,10 @@
           <!--a @click="null" class="TopNavBtn" :class="{'hover': this.$state.site.context_id == 'cart_menu'}">
             <i class="bi bi-cart"></i>
           </a-->
-          <Context @ContextClick="LanguageSelect" id="language_hmenu" :menu="languages_menu" myclass="languages_menu" />
+          <Context @ContextClick="LanguageSelect" id="language_hmenu" :menu="languages_menu" myclass="languages_menu page_nomobile" />
           <a @click="$PageController.ToggleContext('language_hmenu')" @mouseenter="$vm.isDesktop() ? $PageController.OpenContext('language_hmenu') : null" class="TopNavBtn" :class="{'hover': this.$state.site.context_id == 'language_hmenu'}">
             <i class="bi bi-translate"></i>
-            <div class="TopNavBtn_text page_nomobile">{{$t('language.name')}}</div>
+            <div class="TopNavBtn_text">{{$t('language.name')}}</div>
           </a>
           <a @click="$PageController.LoadTheme($state.user_settings.theme == 'light' ? 'dark' : 'light')" class="TopNavBtn">
             <i v-if="$state.user_settings.theme == 'light'" class="bi bi-lightbulb"></i>
@@ -71,11 +71,11 @@
           <template v-if="!$User.isAuthed()">
             <router-link to="/login" class="TopNavBtn">
               <i class="bi bi-box-arrow-in-right"></i>
-              <div class="TopNavBtn_text page_nomobile">{{$t('connect.logIn')}}</div>
+              <div class="TopNavBtn_text">{{$t('connect.logIn')}}</div>
             </router-link>
             <router-link to="/registration" class="TopNavBtn">
               <i class="bi bi-person-plus"></i>
-              <div class="TopNavBtn_text page_nomobile">{{$t('connect.register')}}</div>
+              <div class="TopNavBtn_text">{{$t('connect.register')}}</div>
             </router-link>
           </template>
           <template v-else>
@@ -85,7 +85,7 @@
             </router-link>
             <router-link v-else to="/logout" class="TopNavBtn">
               <i class="bi bi-box-arrow-right"></i>
-              <div class="TopNavBtn_text page_nomobile">{{$t('connect.logOut')}}</div>
+              <div class="TopNavBtn_text">{{$t('connect.logOut')}}</div>
             </router-link>
           </template>
         </template>
@@ -147,6 +147,9 @@ export default {
   computed: {
     isActive: function () {
       return this.$state.page_state.header.active;
+    },
+    isBlured: function () {
+      return this.$config.router.BluredHeader.indexOf(this.$route.href) != -1;
     },
   },
   components: {

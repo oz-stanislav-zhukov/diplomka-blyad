@@ -52,7 +52,7 @@
               </div>
             </template>
             <div class="InfoCard_row">
-              <div @click="Pay" class="InfoCard_button">{{ $t('store.pay') }}</div>
+              <div @click="Pay" class="InfoCard_button">{{ $t('store.checkout') }}</div>
             </div>
           </div>
         </div>
@@ -86,7 +86,7 @@ export default {
       this.$router.push('/profile');
       return;
     }
-    
+
     this.loading = true;
     await this.GetCompanyInfo();
     this.loading = false;

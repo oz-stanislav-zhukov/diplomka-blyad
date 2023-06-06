@@ -27,6 +27,8 @@
 
   --color-shimmer-background: white;
   --color-shimmer-effect: #EDEEF0;
+  --color-shimmer-header-background: #0077FF;
+  --color-shimmer-header-effect: #1a85ff;
 
   --color-navigation-icon: #ADB5BD;
   --color-navigation-hover: #e5e6e9;
@@ -36,12 +38,13 @@
 
   --color-separator: #dbdbdb;
 
-  --color-header: white;
-  --color-header-blur: #ffffffcf;
-  --color-header-text: #000000;
-  --color-header-icon: #ADB5BD;
+  --color-header: #0077FF;
+  --color-header-blur: #0077FFb0;
+  --color-header-text: white;
+  --color-header-icon: #e0e0e0;
   --color-header-hover: #89898914;
-  --color-header-border: #E7E8EC;
+  --color-header-btn-hover: #ffffff14;
+  --color-header-border: #0077FF;
   --color-header-block: #89898914;
   --color-header-block-hover: #89898923;
 

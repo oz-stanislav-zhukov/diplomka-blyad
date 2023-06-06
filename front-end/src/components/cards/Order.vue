@@ -10,7 +10,7 @@
         <i @click="DeleteOrder" v-tippy="{size: 'small', placement: 'right', content: $t('store.delete_order')}" class="bi bi-x-lg red ReviewCard_button"></i>
       </div>
     </div>
-    <div class="ReviewCard_body" style="gap: 5px; border-top: 1px solid var(--color-header-border); padding-top: 10px;">
+    <div class="ReviewCard_body" style="gap: 5px; border-top: 1px solid var(--color-block-border); padding-top: 10px;">
       <div class="ReviewCard_row">
         <div class="ReviewCard_row_name">{{ $t('store.order.id') }}:</div>
         <div class="ReviewCard_row_data">{{ order.id }}</div>

@@ -27,6 +27,8 @@
 
   --color-shimmer-background: #262626;
   --color-shimmer-effect: #313131;
+  --color-shimmer-header-background: #262626;
+  --color-shimmer-header-effect: #313131;
 
   --color-navigation-icon: #a3a3a3;
   --color-navigation-hover: #1c1c1c73;
@@ -41,6 +43,7 @@
   --color-header-text: #e7e7e7;
   --color-header-icon: #e7e7e7;
   --color-header-hover: #a5a5a514;
+  --color-header-btn-hover: #a5a5a514;
   --color-header-border: #282828;
   --color-header-block: #a5a5a514;
   --color-header-block-hover: #a5a5a525;

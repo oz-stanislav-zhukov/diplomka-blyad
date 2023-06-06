@@ -2,6 +2,20 @@
   <Loading v-if="loading" />
   <div v-else class="page_container">
     <div class="page_content">
+      <div v-if="$vm.isDesktop()" class="StoreBlock_left" style="  width: 250px; min-width: 250px;">
+        <div class="MenuBlock">
+          <div class="MenuBlock_content">
+            <div class="MenuBlock_menu">
+              <template v-for="(m, i) in $config.menus.about.links" :key="`menu${i}`">
+                <router-link v-if="!m.url" :to="m.page" class="MenuBlock_button">
+                  <i v-if="m.icon" :class="m.icon"></i>
+                  <div class="MenuBlock_button_text">{{ $t(`header.menus.${m.name}`) }}</div>
+                </router-link>
+              </template>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="page_content_right">
         <div class="InfoCard mw100">
           <div class="InfoCard_title">{{ $t('info.about') }}</div>

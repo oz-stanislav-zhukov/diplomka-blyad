@@ -34,6 +34,7 @@ export default reactive({
   router: {
     AllowUnAuthed: ['/login', '/registration', '/restore', '/', '/info', '/error', '/about', '/rules'],
     OnlyUnAuthed: ['/login', '/registration', '/restore'],
+    BluredHeader: ['/login', '/registration', '/restore', '/logout'],
   },
   locale: {
     languages: [
@@ -50,8 +51,8 @@ export default reactive({
   },
   menus: {
     main: {
-      name: "Unicode Store",
-      icon: "/engine/assets/ico/logo-primary.png",
+      name: "",
+      icon: "/engine/assets/ico/badge",
       links: [
         {
           url: false,
@@ -67,6 +68,17 @@ export default reactive({
           icon: 'bi bi-window-sidebar',
           page: '/cp',
         },
+        {
+          url: false,
+          admin_lvl: 0,
+          name: 'about',
+          icon: 'bi bi-info-square',
+          page: '/about',
+        }
+      ]
+    },
+    about: {
+      links: [
         {
           url: false,
           admin_lvl: 0,

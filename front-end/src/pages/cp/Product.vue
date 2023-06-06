@@ -62,7 +62,7 @@
       </div>
 
       <div class="InfoCard_wrapper">
-        <div class="InfoCard_row">
+        <div class="InfoCard_row buttons">
           <template v-if="edit_product_id != -1">
             <div @click="Edit" class="MainSearch_button">{{ $t('general.edit') }}</div>
             <div @click="Delete" class="MainSearch_button red" style="gap: 15px;"><i class="bi bi-trash"></i> {{ $t('store.delete') }}</div>

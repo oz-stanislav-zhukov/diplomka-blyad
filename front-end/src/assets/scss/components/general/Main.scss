@@ -79,7 +79,7 @@ i { font-family: fontawesome !important; font-style: normal; }
 a:hover { color: var(--color-primary)!important; }
 ol, ul { margin-top: 0; margin-bottom: 0!important; }
 li { user-select: none; outline: none!important; }
-li:target{ outline: 2px var(--color-header-border); border-radius: $button-radius; outline-style: auto; }
+li:target{ outline: 2px var(--color-block-border); border-radius: $button-radius; outline-style: auto; }
 
 p, a, h1, h2, h3, h4, h5, h6, img {
 	-ms-user-select: none;

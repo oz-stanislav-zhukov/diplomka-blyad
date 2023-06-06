@@ -171,7 +171,7 @@ export default {
   letter-spacing: 1px;
   font-weight: 300;
   color: var(--color-text);
-  border: 1px solid var(--color-header-border);
+  border: 1px solid var(--color-block-border);
   
   @media (max-width: 810px) {
     position: unset;
@@ -258,7 +258,7 @@ input {
   letter-spacing: .7px;
   color: var(--color-text);
   background-color: var(--color-block);
-  border: 1px solid var(--color-header-border);
+  border: 1px solid var(--color-block-border);
 }
 
 input::-webkit-input-placeholder {

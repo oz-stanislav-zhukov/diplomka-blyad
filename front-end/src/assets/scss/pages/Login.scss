@@ -34,18 +34,18 @@
 
 .LoginPanel_wrapper{
   right: calc(50% - 175px);
-  top: calc(50% - 200px);
+  top: calc(50% - 250px);
   z-index: 1;
   gap: 20px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   width: 350px;
-  min-height: 400px;
+  min-height: 500px;
   position: absolute;
   padding: 15px;
   border-radius: 10px;
-  //border: 1px solid var(--color-header-border);
+  //border: 1px solid var(--color-block-border);
   background-color: var(--color-block-blur);
   backdrop-filter: blur(35px);
 
@@ -123,8 +123,8 @@
   width: 100%;
   transition: .3s;
   height: 44px;
-  border-bottom: 1px solid var(--color-header-border);
-  color: var(--color-header-text);
+  border-bottom: 1px solid var(--color-block-border);
+  color: var(--color-text);
   outline: none;
 }
 
@@ -151,8 +151,8 @@
   width: 100%;
   transition: .3s;
   height: 38px;
-  border-bottom: 1px solid var(--color-header-border);
-  color: var(--color-header-text);
+  border-bottom: 1px solid var(--color-block-border);
+  color: var(--color-text);
   outline: none;
   font-size: 13px;
   line-height: 16px;
