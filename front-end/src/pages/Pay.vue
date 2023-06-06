@@ -3,7 +3,7 @@
     <div v-if="paid" class="page_content full">
       <div class="page_content_center">
         <div v-if="loading" class="NotFound">
-          <div class="NotFound_title">{{ $t('header.titles.pay') }}</div>
+          <div class="NotFound_title">{{ $t('header.titles.checkout') }}</div>
         </div>
         <div v-else class="NotFound">
           <div class="NotFound_title">{{ $t('header.titles.paid') }}</div>
@@ -15,7 +15,7 @@
     <div v-else class="page_content">
       <div class="page_content_right">
         <div class="InfoCard">
-          <div class="InfoCard_title">{{ $t('store.order.payment') }}</div>
+          <div class="InfoCard_title">{{ $t('header.titles.checkout') }}</div>
           <div v-if="message" class="InfoCard_error">{{ message }}</div>
           
           <div class="InfoCard_wrapper">

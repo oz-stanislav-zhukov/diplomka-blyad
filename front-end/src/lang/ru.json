@@ -406,7 +406,7 @@
 			"guarantee": "Укажите гарантию в месяцах",
 			"category_name_ru": "[RU] Введите название",
 			"category_name_en": "[EN] Введите название",
-			"category_icon": "Ввидите название иконки"
+			"category_icon": "Введите название иконки"
 		},
 		"messages": {
 			"no_new_orders": "Нет новых заказов",

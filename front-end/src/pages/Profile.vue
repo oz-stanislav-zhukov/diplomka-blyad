@@ -21,10 +21,10 @@
               <div class="InfoCard_row_name">{{ $t('social.middle_name') }}</div>
               <input class="InfoCard_row_input" v-model="info.middle_name" type="text" maxlength="20" :placeholder="$t('social.enter.middle_name')">
             </div>
-            <div class="InfoCard_row">
+            <!--div class="InfoCard_row">
               <div class="InfoCard_row_name">{{ $t('social.iin') }}</div>
               <input class="InfoCard_row_input" v-model="info.iin" @keypress="isNumber" maxlength="12" type="text" :placeholder="$t('social.enter.iin')">
-            </div>
+            </div-->
             <div class="InfoCard_row">
               <div class="InfoCard_row_name">{{ $t('general.email') }}</div>
               <input class="InfoCard_row_input" v-model="info.email" type="text" maxlength="50" :placeholder="$t('social.enter.mail')">
