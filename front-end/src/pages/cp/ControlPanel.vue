@@ -28,7 +28,7 @@
         <CategoriesPage v-else-if="$route.params.page == 'categories'" />
         <ReviewsPage v-else-if="$route.params.page == 'reviews'" />
         <OrdersPage v-else-if="$route.params.page == 'orders'" />
-        <div v-else class="NotFound">
+        <div v-else class="NotFound" style="margin: auto;">
           <div class="NotFound_title">404</div>
           <div class="NotFound_desc">{{ $t('header.titles.not_found') }}</div>
         </div>

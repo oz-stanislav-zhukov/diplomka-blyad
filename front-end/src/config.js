@@ -80,11 +80,24 @@ export default reactive({
     about: {
       links: [
         {
-          url: false,
-          admin_lvl: 0,
           name: 'about',
           icon: 'bi bi-info-square',
           page: '/about',
+        },
+        {
+          name: 'guarantee',
+          icon: 'bi bi-file-earmark-text',
+          page: '/info/guarantee',
+        },
+        {
+          name: 'delivery',
+          icon: 'bi bi-truck',
+          page: '/info/delivery',
+        },
+        {
+          name: 'user_help',
+          icon: 'bi bi-info-circle',
+          page: '/info/costumer_help',
         }
       ]
     },

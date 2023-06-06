@@ -4,7 +4,7 @@
       <div class="StoreBlock">
         <div v-if="$vm.isDesktop()" class="StoreBlock_left">
           <div v-if="loading" class="StoreBlock_menu">
-            <a v-for="i in 4" :key="`menu${i}`" class="StoreBlock_menu_button seload"></a>
+            <a v-for="i in 13" :key="`menu${i}`" class="StoreBlock_menu_button seload"></a>
           </div>
           <div v-else class="StoreBlock_menu">
             <template v-for="(c, index) in categories" :key="`menu${index}`">

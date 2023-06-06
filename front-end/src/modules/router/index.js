@@ -5,19 +5,9 @@ const routes = [
     component: () => import(/* webpackChunkName: "main" */ "@/pages/Main")
   },
   {
-    path: '/about',
-    name: 'about',
-    component: () => import(/* webpackChunkName: "about" */ "@/pages/About")
-  },
-  {
     path: '/pay',
     name: 'pay',
     component: () => import(/* webpackChunkName: "pay" */ "@/pages/Pay")
-  },
-  {
-    path: '/rules',
-    name: 'rules',
-    component: () => import(/* webpackChunkName: "rules" */ "@/pages/Rules")
   },
   {
     path: '/profile',
@@ -34,6 +24,12 @@ const routes = [
     name: 'product',
     component: () => import(/* webpackChunkName: "product" */ "@/pages/Product")
   },
+  {
+    path: '/error',
+    name: 'error',
+    component: () => import(/* webpackChunkName: "error" */ "@/pages/Error")
+  },
+  /* Control Panel */
 	{
 		path: '/cp',
 		name: 'admin_panel',
@@ -45,10 +41,22 @@ const routes = [
 			}
 		]
 	},
+  /* About */
   {
-    path: '/error',
-    name: 'error',
-    component: () => import(/* webpackChunkName: "error" */ "@/pages/Error")
+    path: '/about',
+    name: 'about',
+    component: () => import(/* webpackChunkName: "about" */ "@/pages/about/About")
+  },
+  {
+    path: '/info',
+    name: 'info',
+    component: () => import(/* webpackChunkName: "info" */ "@/pages/about/About"),
+		children: [
+			{
+				path: ':page',
+				component: () => import(/* webpackChunkName: "info" */ "@/pages/about/About"),
+			}
+		]
   },
   /* Auth */
   {

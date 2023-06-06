@@ -134,6 +134,27 @@
   color: var(--color-text);
 }
 
+.InfoCard_text_data_sub{
+  margin-left: 25px;
+  gap: 10px;
+  display: flex;
+  font-size: 14px;
+  align-items: flex-start;
+  flex-direction: row;
+  color: var(--color-text);
+}
+
+.InfoCard_text_data_sub::before{
+  margin-top: 8px;
+  content: "";
+  display: block;
+  width: 6px;
+  height: 6px;
+  aspect-ratio: 1;
+  border-radius: 100%;
+  background-color: var(--color-primary);
+}
+
 .InfoCard_row_i{
   gap: 10px;
   display: flex;
