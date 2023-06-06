@@ -7,34 +7,24 @@
 
   @media (max-width: $content-mobile-max-width), (max-height: 600px){
     width: 100%;
-    min-height: calc(100% - 52px);
+    min-height: calc(100% - 80px);
     border: 0;
     position: absolute;
-    top: 52px;
+    top: 80px;
     left: 0;
 	}
 }
 
 .LoginPanel_image{
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
   background-image: url(/engine/assets/img/background.png);
   background-position: center;
   background-repeat: no-repeat;
-  background-size: contain;
-  width: 50vw;
-  max-width: 700px;
-  margin-right: -$block-radius;
-  border-radius: $block-radius;
-  border: 1px solid var(--color-header-border);
-  background-color: var(--color-block);
-
-  @media (max-width: $content-mobile-max-width), (max-height: 600px){
-    background-size: cover;
-    width: 70%;
-    border: 0;
-    border-right: 1px solid var(--color-header-border);
-    border-radius: 0;
-    margin-right: 0;
-	}
+  background-size: cover;
 
   @media (max-width: 520px){
     border: 0;
@@ -43,16 +33,21 @@
 }
 
 .LoginPanel_wrapper{
+  right: calc(50% - 175px);
+  top: calc(50% - 200px);
+  z-index: 1;
   gap: 20px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  width: 320px;
-  min-height: 500px;
-  border-radius: $block-radius;
-  border: 1px solid var(--color-header-border);
-  background-color: var(--color-block);
+  width: 350px;
+  min-height: 400px;
+  position: absolute;
   padding: 15px;
+  border-radius: 10px;
+  //border: 1px solid var(--color-header-border);
+  background-color: var(--color-block-blur);
+  backdrop-filter: blur(35px);
 
   @media (max-width: $content-mobile-max-width), (max-height: 600px){
     gap: 25px;
@@ -60,6 +55,8 @@
 		height: auto;
     min-height: auto;
     border: 0;
+    position: unset;
+    padding: 15px;
 	}
 }
 
@@ -69,6 +66,7 @@
 }
 
 .LoginPanel_title{
+  font-size: 16px;
   font-weight: 600;
   user-select: none;
   color: var(--color-text);
@@ -108,12 +106,13 @@
   font-weight: 600;
   font-size: 11px;
   user-select: none;
+  text-align: center;
   color: var(--color-text);
 }
 
 .LoginPanel_row_input{
   border: 0;
-  background-color: var(--color-block);
+  background-color: var(--color-block-blur);
   border-radius: 6px;
   margin: 0;
   background-position: 10px;
@@ -123,8 +122,8 @@
   line-height: 28px;
   width: 100%;
   transition: .3s;
-  height: 34px;
-  border: 1px solid var(--color-header-border);
+  height: 44px;
+  border-bottom: 1px solid var(--color-header-border);
   color: var(--color-header-text);
   outline: none;
 }
@@ -151,8 +150,8 @@
   line-height: 28px;
   width: 100%;
   transition: .3s;
-  height: 34px;
-  border: 1px solid var(--color-header-border);
+  height: 38px;
+  border-bottom: 1px solid var(--color-header-border);
   color: var(--color-header-text);
   outline: none;
   font-size: 13px;
@@ -174,7 +173,7 @@
   display: flex;
   padding: 0 20px;
   transition: .2s;
-  min-height: 34px;
+  min-height: 38px;
   align-items: center;
   justify-content: center;
   border-radius: $button-radius;

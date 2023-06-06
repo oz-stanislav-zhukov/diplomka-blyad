@@ -81,6 +81,12 @@ export default {
   },
   async created(){
     this.$PageController.pageSettings('Pay', 'pay');
+    if(this.$user.phone.length < 10){
+      window.alert(this.$t('store.messages.enter_phone'));
+      this.$router.push('/profile');
+      return;
+    }
+    
     this.loading = true;
     await this.GetCompanyInfo();
     this.loading = false;

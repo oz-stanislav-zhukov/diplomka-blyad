@@ -3,7 +3,7 @@
     <div class="page_content full">
       <div class="page_content_center">
         <div class="LoginPanel">
-          <div class="LoginPanel_image" style="background-image: url(/engine/assets/img/r2.png);"></div>
+          <div class="LoginPanel_image" :style="`background-image: url(/engine/assets/img/join-${$state.user_settings.theme}.jpg);`"></div>
           <div class="LoginPanel_wrapper">
             <div class="LoginPanel_header">
               <div class="LoginPanel_title">{{ $t('connect.register') }}</div>

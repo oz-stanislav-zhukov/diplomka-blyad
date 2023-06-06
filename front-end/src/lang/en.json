@@ -25,6 +25,7 @@
 			"product": "Product",
 			"orders": "Orders",
 			"pay": "Pay",
+			"checkout": "Checkout",
 			"paid": "Paid",
 
 			"login": "Login",

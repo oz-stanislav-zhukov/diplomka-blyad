@@ -8,7 +8,7 @@ export default reactive({
   },
   domains: {
     https: true,
-    dev: true,
+    dev: false,
     host: window.location.host,
     domain: (process.env.NODE_ENV === 'development') ? "localhost:8080" : "diplom.ozliginus.ru",
     subdomain: window.location.host.split('.')[0],
@@ -57,28 +57,21 @@ export default reactive({
           url: false,
           admin_lvl: 0,
           name: 'main',
-          icon: '',
+          icon: 'bi bi-bag',
           page: '/',
         },
         {
           url: false,
           admin_lvl: 1,
           name: 'admin_panel',
-          icon: '',
-          page: '/cp/orders',
-        },
-        {
-          url: false,
-          admin_lvl: 0,
-          name: 'rules',
-          icon: '',
-          page: '/rules',
+          icon: 'bi bi-window-sidebar',
+          page: '/cp',
         },
         {
           url: false,
           admin_lvl: 0,
           name: 'about',
-          icon: '',
+          icon: 'bi bi-info-square',
           page: '/about',
         }
       ]

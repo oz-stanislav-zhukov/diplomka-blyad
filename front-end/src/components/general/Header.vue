@@ -11,8 +11,9 @@
         <template v-for="(m, index) in $config.menus.main.links" :key="`menu${index}`">
           <template v-if="$User.isAdmin(m.admin_lvl)">
             <router-link v-if="!m.url" :to="m.page" @click="CloseMobileMenu" class="TopNavBtn">
-              <i v-if="m.icon" :class="m.icon"></i>
+              <i v-if="m.icon" :class="[m.icon, {'primary': $route.href == m.page || (m.page != '/' && $route.href?.indexOf(m.page) !== -1)}]"></i>
               <div class="TopNavBtn_text">{{ $t(`header.menus.${m.name}`) }}</div>
+              <!--div class="TopNavBtn_desc">{{ m.page }}</div-->
             </router-link>
             <a v-else :href="m.page" @click="CloseMobileMenu" target="_blank" class="TopNavBtn">
               <i v-if="m.icon" :class="m.icon"></i>
@@ -46,6 +47,7 @@
         <template v-if="!$vm.isMobile()">
           <router-link to="/cart" class="TopNavBtn" :class="{'hover': this.$state.site.context_id == 'cart_menu'}">
             <i class="bi bi-cart"></i>
+            <div class="TopNavBtn_text">{{$t('store.cart')}}</div>
           </router-link>
           <!--a @click="null" class="TopNavBtn" :class="{'hover': this.$state.site.context_id == 'cart_menu'}">
             <i class="bi bi-cart"></i>
@@ -53,10 +55,12 @@
           <Context @ContextClick="LanguageSelect" id="language_hmenu" :menu="languages_menu" myclass="languages_menu" />
           <a @click="$PageController.ToggleContext('language_hmenu')" @mouseenter="$vm.isDesktop() ? $PageController.OpenContext('language_hmenu') : null" class="TopNavBtn" :class="{'hover': this.$state.site.context_id == 'language_hmenu'}">
             <i class="bi bi-translate"></i>
+            <div class="TopNavBtn_text page_nomobile">{{$t('language.name')}}</div>
           </a>
           <a @click="$PageController.LoadTheme($state.user_settings.theme == 'light' ? 'dark' : 'light')" class="TopNavBtn">
             <i v-if="$state.user_settings.theme == 'light'" class="bi bi-lightbulb"></i>
             <i v-else class="bi bi-lightbulb-fill"></i>
+            <div class="TopNavBtn_text">{{$t(`general.themes.${$PageController.GetThemeID($state.user_settings.theme)}`)}}</div>
           </a>
           <!--a @click="$PageController.LoadTheme($state.user_settings.theme == 'light' ? 'dark' : 'light')" class="TopNavBtn">
             <i class="bi bi-palette"></i>
@@ -76,6 +80,7 @@
           </template>
           <template v-else>
             <router-link v-if="$route.path != '/profile'" to="/profile" class="TopNavBtn">
+              <i class="bi bi-person-circle"></i>
               <div class="TopNavBtn_text">{{ $user.first_name }}</div>
             </router-link>
             <router-link v-else to="/logout" class="TopNavBtn">

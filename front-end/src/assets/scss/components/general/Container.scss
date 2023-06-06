@@ -6,12 +6,12 @@
 
 .page_container{
   width: 100%;
-  padding-top: 52px;
+  padding-top: 80px;
 	overflow-x: hidden;
 }
 
 .page_container:not(.no_footer){
-  min-height: calc(100vh - 52px);
+  min-height: calc(100vh - 80px);
 
   @media (max-width: $content-mobile-middle-width){
     min-height: calc(100vh - 124px);
@@ -19,14 +19,14 @@
 }
 
 .page_container:not(.no_footer) .page_content{
-  min-height: calc(100vh - 104px);
+	min-height: calc(100vh - 160px);
 
   @media (min-height: 1100px){
 		min-height: unset;
 	}
 
   @media (max-width: $content-mobile-max-width){
-    min-height: calc(100vh - 52px);
+    min-height: calc(100vh - 80px);
   }
 }
 
@@ -48,7 +48,7 @@
 
 .page_content.full{
   flex-direction: column;
-  min-height: calc(100vh - 52px);
+  min-height: calc(100vh - 80px);
 }
 
 .page_content_center{
@@ -82,9 +82,6 @@
 
 	@media (max-width: $content-mobile-tablet) {
 		width: 100%;
-		padding: unset;
-		padding-top: 15px;
-		background-color: unset;
 		border: unset;
 	}
 }

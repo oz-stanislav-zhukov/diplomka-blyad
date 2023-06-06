@@ -88,7 +88,7 @@
               <div v-if="message" class="ReviewCard_message">{{ message }}</div>
 
               <div v-if="$User.isAuthed()" class="ReviewCard_send">
-                <input class="ReviewCard_send_input" v-model="review.name" type="text" maxlength="50" :placeholder="$t('info.enter_name')">
+                <!--input class="ReviewCard_send_input" v-model="review.name" type="text" maxlength="50" :placeholder="$t('info.enter_name')"-->
                 <textarea class="ReviewCard_send_textarea" v-model="review.text" type="text" maxlength="255" :placeholder="$t('info.enter_review')"></textarea>
                 <div @click="AddReview" class="ReviewCard_send_button">{{ $t('info.send') }}</div>
               </div>
@@ -135,6 +135,7 @@ export default {
       this.review.text = '';
       this.review.name = `${this.$user.first_name} ${this.$user.last_name}`;
       this.loading = false;
+      if(!this.$User.isAuthed()) this.Message(`${this.$t('info.messages.need_auth_review.0')} ${this.$t('info.messages.need_auth_review.1')}`);
     },
     async GetProduct(){
       this.Message();

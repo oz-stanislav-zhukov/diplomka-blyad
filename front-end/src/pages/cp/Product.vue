@@ -1,7 +1,7 @@
 <template>
   <template v-if="!loading && !auto_reg">
     <div class="InfoCard">
-      <div class="InfoCard_title">{{ $t('header.titles.add_product') }}</div>
+      <div class="InfoCard_title">{{ edit_product_id != -1 ? $t('header.titles.edit_product') : $t('header.titles.add_product') }}</div>
       <div v-if="message" class="InfoCard_error">{{ message }}</div>
 
       <div class="InfoCard_wrapper">

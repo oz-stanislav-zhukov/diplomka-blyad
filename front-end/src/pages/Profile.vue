@@ -1,40 +1,42 @@
 <template>
   <div class="page_container">
     <div class="page_content">
-      <div class="InfoCard">
-        <div class="InfoCard_title">{{ $t('header.titles.profile') }}</div>
-        
-        <div class="InfoCard_wrapper">
-          <div class="InfoCard_row">
-            <div class="InfoCard_row_name">{{ $t('social.first_name') }}</div>
-            <input class="InfoCard_row_input" v-model="info.first_name" type="text" maxlength="16" :placeholder="$t('social.enter.first_name')">
-          </div>
-          <div class="InfoCard_row">
-            <div class="InfoCard_row_name">{{ $t('social.last_name') }}</div>
-            <input class="InfoCard_row_input" v-model="info.last_name" type="text" maxlength="24" :placeholder="$t('social.enter.last_name')">
-          </div>
-          <div class="InfoCard_row">
-            <div class="InfoCard_row_name">{{ $t('social.middle_name') }}</div>
-            <input class="InfoCard_row_input" v-model="info.middle_name" type="text" maxlength="20" :placeholder="$t('social.enter.middle_name')">
-          </div>
-          <div class="InfoCard_row">
-            <div class="InfoCard_row_name">{{ $t('social.iin') }}</div>
-            <input class="InfoCard_row_input" v-model="info.iin" @keypress="isNumber" maxlength="12" type="text" :placeholder="$t('social.enter.iin')">
-          </div>
-          <div class="InfoCard_row">
-            <div class="InfoCard_row_name">{{ $t('general.email') }}</div>
-            <input class="InfoCard_row_input" v-model="info.email" type="text" maxlength="50" :placeholder="$t('social.enter.mail')">
-          </div>
-          <div class="InfoCard_row">
-            <div class="InfoCard_row_name">{{ $t('general.phone') }}</div>
-            <input class="InfoCard_row_input" v-model="info.phone" type="text" @keypress="isNumber($event, true)" maxlength="14" :placeholder="$t('social.enter.phone')">
-          </div>
-          <div class="InfoCard_row">
-            <div class="InfoCard_row_name">{{ $t('social.avatar') }}</div>
-            <input class="InfoCard_row_input" v-model="info.avatar" type="text" maxlength="500" :placeholder="$t('social.enter.avatar')">
-          </div>
-          <div class="InfoCard_row">
-            <div @click="SetEdit" class="MainSearch_button">{{ $t('general.edit') }}</div>
+      <div class="page_content_right">
+        <div class="InfoCard">
+          <div class="InfoCard_title">{{ $t('header.titles.profile') }}</div>
+          
+          <div class="InfoCard_wrapper">
+            <div class="InfoCard_row">
+              <div class="InfoCard_row_name">{{ $t('social.first_name') }}</div>
+              <input class="InfoCard_row_input" v-model="info.first_name" type="text" maxlength="16" :placeholder="$t('social.enter.first_name')">
+            </div>
+            <div class="InfoCard_row">
+              <div class="InfoCard_row_name">{{ $t('social.last_name') }}</div>
+              <input class="InfoCard_row_input" v-model="info.last_name" type="text" maxlength="24" :placeholder="$t('social.enter.last_name')">
+            </div>
+            <div class="InfoCard_row">
+              <div class="InfoCard_row_name">{{ $t('social.middle_name') }}</div>
+              <input class="InfoCard_row_input" v-model="info.middle_name" type="text" maxlength="20" :placeholder="$t('social.enter.middle_name')">
+            </div>
+            <div class="InfoCard_row">
+              <div class="InfoCard_row_name">{{ $t('social.iin') }}</div>
+              <input class="InfoCard_row_input" v-model="info.iin" @keypress="isNumber" maxlength="12" type="text" :placeholder="$t('social.enter.iin')">
+            </div>
+            <div class="InfoCard_row">
+              <div class="InfoCard_row_name">{{ $t('general.email') }}</div>
+              <input class="InfoCard_row_input" v-model="info.email" type="text" maxlength="50" :placeholder="$t('social.enter.mail')">
+            </div>
+            <div class="InfoCard_row">
+              <div class="InfoCard_row_name">{{ $t('general.phone') }}</div>
+              <input class="InfoCard_row_input" v-model="info.phone" type="text" @keypress="isNumber($event, true)" maxlength="14" :placeholder="$t('social.enter.phone')">
+            </div>
+            <div class="InfoCard_row">
+              <div class="InfoCard_row_name">{{ $t('social.avatar') }}</div>
+              <input class="InfoCard_row_input" v-model="info.avatar" type="text" maxlength="500" :placeholder="$t('social.enter.avatar')">
+            </div>
+            <div class="InfoCard_row">
+              <div @click="SetEdit" class="MainSearch_button">{{ $t('general.edit') }}</div>
+            </div>
           </div>
         </div>
       </div>
@@ -105,6 +107,18 @@ export default {
 }
 </script>
 
-<style lang="scss">
-
+<style lang="scss" scope>
+.InfoCard_row{
+  justify-content: space-between;
+}
+.MainSearch_button{
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  
+  @media (max-width: $content-mobile-max-width){ position: unset; }
+}
+.page_content_right{
+  position: relative;
+}
 </style>
