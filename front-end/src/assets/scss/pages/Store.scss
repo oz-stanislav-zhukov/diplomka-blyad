@@ -883,8 +883,6 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-image: url('/engine/assets/img/background.png');
-
-  @media (max-width: $content-mobile-tablet){ width: 100%; max-width: 100%; }
 }
 
 .OrderCard_image:hover{
