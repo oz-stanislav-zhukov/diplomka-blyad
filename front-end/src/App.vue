@@ -12,25 +12,6 @@
 </template>
 
 <script>
-import { getCurrentInstance } from 'vue'
-import Petrovich from 'petrovich'
-import Translit from 'cyrillic-to-translit-js'
-
-import config from '@/config.js'
-import state from '@/state.js'
-import user from '@/userdata.js'
-
-import { CryptoGenPublic, getHash, Encrypt, Decrypt } from "@/modules/Crypto.js"
-import PageController from '@/modules/PageController.js'
-import { setLanguage, switchLang } from '@/modules/Language.js'
-import Functions from '@/modules/Functions.js'
-import Storage from '@/modules/Storage.js'
-import Device from '@/modules/Device.js'
-import Debug from '@/modules/Debug.js'
-import Store from '@/modules/Store.js'
-import User from '@/modules/User.js'
-import Api from '@/modules/Api.js'
-
 import Header from '@/components/general/Header.vue'
 import Footer from '@/components/general/Footer.vue'
 import Loading from '@/pages/Loading.vue'
@@ -40,69 +21,33 @@ import ShimmerEffect from '@/components/effects/ShimmerEffect.vue'
 
 var App = {
   name: 'App',
-  data (){
-    if(config.debug.enabled) Debug.custom('Vue', 'Application initialization');
-    if(Storage.isCookie('language')) Storage.set('language', Storage.getCookie('language'));
-    if(Storage.is('language')) state.user_settings.language = Storage.get('language');
-    setLanguage(this.$i18n, state.user_settings.language, false);
-    return { }
-  },
-  provide() {
-    const app = getCurrentInstance().appContext;
-    let isDesktop = PageController.isDesktop;
-    let isTablet = PageController.isTablet;
-    let isMobile = PageController.isMobile;
-
-    window.PageController = PageController;
-    app.config.globalProperties.$Crypto = {CryptoGenPublic, getHash, Encrypt, Decrypt};
-    app.config.globalProperties.$config = config;
-    app.config.globalProperties.$state = state;
-    app.config.globalProperties.$user = user;
-    app.config.globalProperties.$App = this;
-    app.config.globalProperties.$PageController = PageController;
-    app.config.globalProperties.$Petrovich = Petrovich;
-    app.config.globalProperties.$Translit = new Translit();
-    app.config.globalProperties.$Api = Api;
-    app.config.globalProperties.$User = User;
-    app.config.globalProperties.$Store = Store;
-    app.config.globalProperties.$Debug = Debug;
-    app.config.globalProperties.$Storage = Storage;
-    app.config.globalProperties.$Device = Device;
-    app.config.globalProperties.$Func = Functions;
-    app.config.globalProperties.$Lang = { switchLang };
-    app.config.globalProperties.$vm = { isDesktop, isTablet, isMobile };
-
-    return {
-      $globals: getCurrentInstance().appContext.app.config.globalProperties
-    }
-  },
   async created() {
-    state.axios = this.axios;
-    state.$event = this.$event;
-    state.$route = this.$route;
-    state.$router = this.$router;
-    state.$i18n = this.$i18n;
-    state.$t = this.$t;
+    this.$Debug.custom('Vue', 'Application initialization');
+    this.$state.axios = this.axios;
+    this.$state.$event = this.$event;
+    this.$state.$route = this.$route;
+    this.$state.$router = this.$router;
+    this.$state.$t = this.$t;
     
-    Debug.created();
-    Device.created();
-    Functions.created();
-    PageController.created();
-    await User.Init();
-    Store.Init();
+    this.$Lang.created();
+    this.$Debug.created();
+    this.$Device.created();
+    this.$Func.created();
+    this.$PageController.created();
+    await this.$User.Init();
+    this.$Store.Init();
   },
   methods: {},
   mounted() {
-    state.loading = false;
-    state.page_loading = false;
-
-    if(config.debug.enabled) Debug.custom('Vue', 'Application initialization finished');
+    this.$state.loading = false;
+    this.$state.page_loading = false;
+    this.$Debug.custom('Vue', 'Application initialization finished');
   },
   watch: {
     $route: function () {
-      state.loading = true;
-      state.page_loading = true;
-      user.online = Math.floor(Date.now() / 1000);
+      this.$state.loading = true;
+      this.$state.page_loading = true;
+      this.$user.online = Math.floor(Date.now() / 1000);
     }
   },
   components: {

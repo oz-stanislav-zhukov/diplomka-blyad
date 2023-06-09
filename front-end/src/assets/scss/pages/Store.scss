@@ -643,6 +643,7 @@
 .StoreProduct_image{
   transition: .3s;
   width: 20vw;
+  max-width: 400px;
   aspect-ratio: 1/1;
   background-position: center;
   background-repeat: no-repeat;

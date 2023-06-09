@@ -12,7 +12,6 @@ export default reactive({
   $event: null,
   $route: null,
   $router: null,
-  $i18n: null,
   $t: null,
 
   platform: {

@@ -1,6 +1,6 @@
 import config from '@/config.js'
 import state from '@/state.js'
-import { setLanguage } from '@/modules/Language.js'
+import Language from '@/modules/Language.js'
 import Debug from '@/modules/Debug.js'
 import Storage from '@/modules/Storage.js'
 
@@ -66,7 +66,7 @@ export default {
     if(!newtitle) newtitle = state.$route.name;
     if(typeof(newtitle) == "undefined") return;
 
-    const name = state.$i18n.messages[state.$i18n.locale].header.titles[newtitle];
+    const name = Language.$i18n.messages[Language.$i18n.locale].header.titles[newtitle];
     const math = typeof(name) != "undefined" && name !== null;
 
     document.querySelector("link[rel~='icon']").href = state.page_state.icon;
@@ -93,7 +93,7 @@ export default {
     if(config.debug.page_state) Debug.log('Engine', `Application reconfigured for ${state.page_state.active} page`);
   },
   pageMounted() {
-    if(state.user_settings.language != state.$i18n.locale) setLanguage(state.$i18n, state.user_settings.language);
+    if(state.user_settings.language != Language.$i18n.locale) Language.setLanguage(Language.$i18n, state.user_settings.language);
     if(config.debug.page_state) Debug.log('Engine', `Page ${state.page_state.active} Mounted`);
   },
   subpageMounted(){

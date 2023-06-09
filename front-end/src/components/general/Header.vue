@@ -132,7 +132,7 @@ export default {
       }
 		},
     LanguageSelect(name){
-      this.$Lang.switchLang(this.$i18n, name);
+      this.$Lang.setLanguage(name);
     },
     ToggleMobileMenu() {
       this.$state.site.mainmenu_active = !this.$state.site.mainmenu_active;
