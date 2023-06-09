@@ -1,6 +1,5 @@
 /* Packages */
 import { createApp } from 'vue'
-import router from '@/modules/Router.js'
 import '@/modules/ServiceWorker'
 import mitt from 'mitt';
 import axios from 'axios'
@@ -25,6 +24,7 @@ import PageController from '@/modules/PageController.js'
 import Language from '@/modules/Language.js'
 import Functions from '@/modules/Functions.js'
 import Storage from '@/modules/Storage.js'
+import Router from '@/modules/Router.js'
 import Device from '@/modules/Device.js'
 import Debug from '@/modules/Debug.js'
 import Store from '@/modules/Store.js'
@@ -36,7 +36,7 @@ import App from '@/App.vue'
 
 /* App Init */
 const app = createApp(App);
-app.use(router());
+app.use(Router());
 app.use(Language.setup());
 app.use(VueAxios, axios);
 app.use(VueMobileDetection);

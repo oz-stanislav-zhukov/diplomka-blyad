@@ -93,7 +93,7 @@ export default {
     if(config.debug.page_state) Debug.log('Engine', `Application reconfigured for ${state.page_state.active} page`);
   },
   pageMounted() {
-    if(state.user_settings.language != Language.$i18n.locale) Language.setLanguage(Language.$i18n, state.user_settings.language);
+    if(state.user_settings.language != Language.$i18n.locale) Language.setLanguage(state.user_settings.language);
     if(config.debug.page_state) Debug.log('Engine', `Page ${state.page_state.active} Mounted`);
   },
   subpageMounted(){
