@@ -1,4 +1,4 @@
-/* Modules */
+/* Packages */
 import { createApp } from 'vue'
 import router from '@/modules/Router.js'
 import '@/modules/ServiceWorker'
